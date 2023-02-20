@@ -78,6 +78,7 @@ const WaterRising = () => {
     boolean = Math.floor((Math.random() * 10)) % 2 == 0 ? false : true;
     score["score5"] = boolean ? score["score5"] - 8 : score["score5"];
   }
+
   // Answering One Questions
   const submitAnswer = (e, ans) => {
 
@@ -92,6 +93,7 @@ const WaterRising = () => {
     }
     console.log(correct, 74)
     setAnswer(ans);
+    
     setWaterHeight(waterHeight - 8);
 
     IncreaseTheBotScores();
@@ -124,7 +126,7 @@ const WaterRising = () => {
         setScore(initialScore);
         setQNo(0);
       }
-    }, 1000)
+    }, 1000) // 1 sec
 
   }
 
