@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-// import WaterRising from './Games/WaterRising'
+import WaterRising from './Games/WaterRising'
 import StoryBased from './Games/StoryBased'
 
 
