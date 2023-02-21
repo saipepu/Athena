@@ -7,6 +7,7 @@ const sampleData = null;
 var images = [
   "src/assets/talky_talky_startscreen.png", // start scene
   "src/assets/employee_background.png", // employee background
+  "src/assets/third_scene_backgorund.png"
 ]
 
 var imgPath = "url(" + images[0] + ")"
@@ -15,8 +16,6 @@ var imgPath = "url(" + images[0] + ")"
 
 const StoryBased = () => {
   const [next, setNext] = useState(1);
-  const [startingImage, setStartingImage] = useState(false);
-  const [employeeBackground, setEmployeeBackground] = useState(false);
   const [isVisible, setIsVisible] = useState(false)
   const [isStartingSceneModel, setIsStartingSceneModel] = useState(true);
 
@@ -68,35 +67,42 @@ const StoryBased = () => {
     document.getElementById('submitform').reset()
   }, [next]);
 
-  function submitAnswer(e, each, textNode) {
-    if (textNode.answer === each.text) {
-      setTimeout(() => {
-        setNext(each.next)
-      }, 500);
-    }
-  }
+  // function submitAnswer(e, each, textNode) {
+  //   if (textNode.answer === each.text) {
+  //     setTimeout(() => {
+  //       setNext(each.next)
+  //     }, 500);
+  //   }
+  // }
 
-  function startScene(setImage, startTime, imageIndex) {
+  function secondScene(startTime, imageIndex) {
     useEffect(() => {
       if (sampleData === null) {
         const toRef = setTimeout(() => {
+          // close first scene
           setIsStartingSceneModel(false);
-          setImage(true);
           imgPath = "url(" + images[imageIndex] + ")"
           clearTimeout(toRef);
         }, startTime);
       }
     }, [sampleData]);
-  }
-  
 
-  function startModel() {
     useEffect(() => {
       const timeoutId = setTimeout(() => {
+        // Show models in second scene
         setIsVisible(true);
       }, 2500);
       return () => clearTimeout(timeoutId);
     }, []);
+  }
+
+  function secondSceneEnd(startTime) {
+    useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        setIsVisible(false);
+      }, startTime);
+      return () => clearTimeout(timeoutId);
+    }, [isVisible]);
   }
 
   function showTextNode(textNodesIndex) {
@@ -104,12 +110,10 @@ const StoryBased = () => {
       (arrayTextNodes) => arrayTextNodes.id === textNodesIndex
     );
 
-    // Starting Image Diplay
-    startScene(setStartingImage, 2000, 0)
-
-    // employee_background
-    startScene(setEmployeeBackground, 2000, 1)
-    startModel();
+    // Second scene
+    // startScene(2000, 0)
+    secondScene(2000, 1)
+    secondSceneEnd(1000)
 
     return (
       <div style={{ backgroundImage: `${imgPath}` }} className='container'>
@@ -121,6 +125,11 @@ const StoryBased = () => {
           <p className='hisir'>Hi sir! How can I help you today?</p>
         </div>
         <div style={{display: isVisible? 'block' : 'none'}} className='micperson'></div>
+
+        <div >
+
+        </div>
+
         <Question textNode={textNode} next={next}/>
       </div>
     );
