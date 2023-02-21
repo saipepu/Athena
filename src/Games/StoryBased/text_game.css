@@ -1,0 +1,33 @@
+.app {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+input {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #CCC;
+    cursor: pointer;
+}
+
+/* input:checked+label {
+    background: red;
+} */
+
+input:checked+.correctanswer {
+    background: rgb(5, 255, 5);
+}
+
+input:checked+.wronganswer {
+    background: red;
+}
+
+.startscreen {
+    position: absolute;
+}
