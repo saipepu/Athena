@@ -1,5 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import './text_game.css'
+import Question from '../../components/StoryBased/Question'
+
 
 const sampleData = null;
 var images = [
@@ -15,9 +17,8 @@ const StoryBased = () => {
   const [next, setNext] = useState(1);
   const [startingImage, setStartingImage] = useState(false);
   const [employeeBackground, setEmployeeBackground] = useState(false);
-  const [currentImage, setCurrentImage] = useState(images[0]);
-
-
+  const [isVisible, setIsVisible] = useState(false)
+  const [isStartingSceneModel, setIsStartingSceneModel] = useState(true);
 
   const arrayTextNodes = [
     {
@@ -75,24 +76,27 @@ const StoryBased = () => {
     }
   }
 
-  function startScene(startingImage, setStartingImage, startTime, endTime, imageIndex, endIndex) {
+  function startScene(setImage, startTime, imageIndex) {
     useEffect(() => {
       if (sampleData === null) {
         const toRef = setTimeout(() => {
-          setStartingImage(true);
+          setIsStartingSceneModel(false);
+          setImage(true);
           imgPath = "url(" + images[imageIndex] + ")"
           clearTimeout(toRef);
         }, startTime);
       }
     }, [sampleData]);
+  }
+  
 
-    // useEffect(() => {
-    //   const toRef = setTimeout(() => {
-    //     setStartingImage(false);
-    //     imgPath = "url(" + images[endIndex] + ")"
-    //     clearTimeout(toRef);
-    //   }, endTime);
-    // }, [startingImage]);
+  function startModel() {
+    useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        setIsVisible(true);
+      }, 2500);
+      return () => clearTimeout(timeoutId);
+    }, []);
   }
 
   function showTextNode(textNodesIndex) {
@@ -101,47 +105,23 @@ const StoryBased = () => {
     );
 
     // Starting Image Diplay
-    startScene(startingImage, setStartingImage, 2000, 2000, 0, 1)
+    startScene(setStartingImage, 2000, 0)
+
     // employee_background
-    startScene(employeeBackground, setEmployeeBackground, 2000, 4000, 1, 2)
+    startScene(setEmployeeBackground, 2000, 1)
+    startModel();
 
     return (
       <div style={{ backgroundImage: `${imgPath}` }} className='container'>
+        <h1 style={{ display: isStartingSceneModel? 'block' : 'none' }} className='title'>Talky-Talky</h1>
+        <div style={{ display: isStartingSceneModel? 'block' : 'none' }} className="startingscenemodel"></div>
 
-        {/* <div style={{backgroundImage: `url("src/assets/employee_background.png")`}} className='employeebackground'></div> */}
-
-        <div className='speakbubble'>
+        {/* Employee Scene */}
+        <div style={{display: isVisible? 'block' : 'none'}} className='speakbubble'>
           <p className='hisir'>Hi sir! How can I help you today?</p>
         </div>
-        <div className='micperson'>
-
-        </div>
-        <div className='startscreen'>
-        </div>
-        <div className='questionandanswer'>
-          <h1>{textNode.text}</h1>
-          <div>
-            <form id='submitform'>
-              {textNode.options.map((each, key) => {
-                return (
-                  <span key={key}>
-                    <input
-                      type="radio"
-                      key={key}
-                      id={key}
-                      onClick={(e) => submitAnswer(e, each, textNode)}
-                      name="radio" />
-                    <label
-                      className={textNode.answer === each.text ? 'correctanswer' : 'wronganswer'}
-                      htmlFor={key}>
-                      {each.text}
-                    </label>
-                  </span>
-                );
-              })}
-            </form>
-          </div>
-        </div>
+        <div style={{display: isVisible? 'block' : 'none'}} className='micperson'></div>
+        <Question textNode={textNode} next={next}/>
       </div>
     );
   }

@@ -8,6 +8,16 @@
     background: url("src/assets/speakbubble.png");
 }
 
+.startingscenemodel {
+    position: absolute;
+    width: 1920px;
+    height: 1136px;
+    left: -1287px;
+    top: -30px;
+
+    background: url("src/assets/start_model.png");
+}
+
 .employeebackground {
     position: relative;
     width: 100%;
@@ -35,13 +45,33 @@
     left: 326px;
     top: 85px;
 
-    font-family: 'Lexend';
     font-style: normal;
     font-weight: 400;
     font-size: 64px;
     line-height: 80px;
 
     color: #182227;
+}
+
+.title {
+    /* Talky-Talky */
+
+
+position: absolute;
+width: 763px;
+height: 182px;
+left: 550px;
+top: 400px;
+
+font-family: 'Poppins';
+font-style: italic;
+font-weight: 500;
+font-size: 130px;
+line-height: 140%;
+/* identical to box height, or 182px */
+
+
+color: #FFFFFF;
 }
 
 .questionandanswer {
@@ -85,8 +115,4 @@ input:checked+.correctanswer {
 
 input:checked+.wronganswer {
     background: red;
-}
-
-.startscreen {
-    position: absolute;
 }
