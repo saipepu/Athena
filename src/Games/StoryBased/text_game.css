@@ -1,8 +1,67 @@
-.app {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.speakbubble {
+    position: absolute;
+    width: 1122px;
+    height: 531px;
+    left: 10px;
+    top: 154px;
+
+    background: url("src/assets/speakbubble.png");
+}
+
+.employeebackground {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+
+}
+
+.micperson {
+    /* Gaia (1) 1 */
+    position: absolute;
+    width: 1537px;
+    height: 1027px;
+    left: 420px;
+    top: 225px;
+
+    background: url("src/assets/micperson.png");
+}
+
+/* Hi sir! How can I help you today? */
+.hisir {
+    position: absolute;
+    width: 518px;
+    height: 302px;
+    left: 326px;
+    top: 85px;
+
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 80px;
+
+    color: #182227;
+}
+
+.questionandanswer {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    background: #eeeeee;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 10px 0px #00000005;
+    border-radius: 10px;
 }
 
 input {
