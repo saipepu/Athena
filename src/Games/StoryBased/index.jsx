@@ -230,15 +230,6 @@ const StoryBased = () => {
                 ) : (
                   <div>
                     {scenes[nextSceneCount].scene === "start" ? (
-                      <></>
-                    ) : (
-                      <>
-                        <div className="customerSpeakbubble">
-                          <p className="hisir">{scenes[nextSceneCount].text}</p>
-                        </div>
-                      </>
-                    )}
-                    {scenes[nextSceneCount].scene === "start" ? (
                       <>
                         <div
                           style={{
@@ -254,6 +245,10 @@ const StoryBased = () => {
                       </>
                     ) : (
                       <>
+                        <div className="customerSpeakbubble">
+                          <p className="hisir">{scenes[nextSceneCount].text}</p>
+                        </div>
+
                         <div
                           style={{
                             backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
@@ -267,19 +262,6 @@ const StoryBased = () => {
                 )}
               </>
             )}
-
-            {/* Avatar display */}
-            {/* <div
-              style={{
-                backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
-                backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
-              }}
-              className={
-                scenes[nextSceneCount].scene === "employee"
-                  ? "employeePosition"
-                  : "customerPosition"
-              }
-            ></div> */}
           </div>
         )}
       </div>
