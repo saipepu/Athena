@@ -1,6 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
-
+import React from "react";
+import { useState } from "react";
 
 const Question = ({ textNode, arrayTextNodes, next }) => {
   // function submitAnswer(e, each, textNode) {
@@ -12,10 +11,10 @@ const Question = ({ textNode, arrayTextNodes, next }) => {
   // }
 
   return (
-    <div className='questionandanswer'>
+    <div className="questionandanswer">
       <h1>{textNode.text}</h1>
       <div>
-        <form id='submitform'>
+        <form id="submitform">
           {textNode.options.map((each, key) => {
             return (
               <span key={key}>
@@ -24,10 +23,16 @@ const Question = ({ textNode, arrayTextNodes, next }) => {
                   key={key}
                   id={key}
                   onClick={(e) => submitAnswer(e, each, textNode)}
-                  name="radio" />
+                  name="radio"
+                />
                 <label
-                  className={textNode.answer === each.text ? 'correctanswer' : 'wronganswer'}
-                  htmlFor={key}>
+                  className={
+                    textNode.answer === each.text
+                      ? "correctanswer"
+                      : "wronganswer"
+                  }
+                  htmlFor={key}
+                >
                   {each.text}
                 </label>
               </span>
@@ -37,6 +42,6 @@ const Question = ({ textNode, arrayTextNodes, next }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Question;
