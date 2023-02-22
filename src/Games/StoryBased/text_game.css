@@ -18,7 +18,9 @@
   position: absolute;
   width: 949px;
   height: 680px;
-  left: 239px;
+  left: 289px;
+
+  /* left: 239px; */
   top: 239px;
   background-size: 963px;
 }
@@ -49,6 +51,30 @@
   top: -30px;
 
   /* background: url("src/assets/start_model.png"); */
+}
+
+.questionScene {
+  position: absolute;
+  width: 571px;
+  height: 74px;
+  left: 159px;
+  top: 224px;
+
+  background: url("src/assets/question_box.png");
+}
+
+.questionText {
+  /* How would you deal with this situation? */
+  padding: 15px;
+  padding-left: 25px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 39px;
+
+  color: #182227;
 }
 
 .employeebackground {

@@ -18,7 +18,7 @@ const scenes = [
     scene: "employee",
     background: "src/assets/employee_background.png",
     avatar: "src/assets/micperson.png",
-    speakbox: "src/assets/speakbubble.png",
+    // speakbox: "src/assets/speakbubble.png",
     text: "Hi sir! How can I help you today?",
     backgroundSize: 963,
   },
@@ -28,7 +28,7 @@ const scenes = [
     scene: "customer",
     background: "src/assets/third_scene_backgorund.png",
     avatar: "src/assets/customer_third.png",
-    speakbox: "src/assets/speakbubble.png",
+    // speakbox: "src/assets/speakbubble.png",
     text: "I want to reserve table for tonight at 8 pm.",
     backgroundSize: 1203,
   },
@@ -38,29 +38,50 @@ const scenes = [
     scene: "employee",
     background: "src/assets/employee_background.png",
     avatar: "src/assets/micperson.png",
-    speakbox: "src/assets/speakbubble.png",
+    // speakbox: "src/assets/speakbubble.png",
     text: "Sorry, we do not take reservation on weekend sir.",
     backgroundSize: 963,
   },
   // Fifth scene
   {
-    sceneID: 3,
+    sceneID: 4,
     scene: "customer",
     background: "src/assets/third_scene_backgorund.png",
     avatar: "src/assets/fifth_model.png",
-    speakbox: "src/assets/speakbubble.png",
+    // speakbox: "src/assets/speakbubble.png",
     text: "Why don't you make it clear on the website?",
     backgroundSize: 1263,
   },
   // six scene
   {
-    sceneID: 3,
+    sceneID: 5,
     scene: "customer",
     background: "src/assets/third_scene_backgorund.png",
     avatar: "src/assets/six_model.png",
-    speakbox: "src/assets/speakbubble.png",
+    // speakbox: "src/assets/speakbubble.png",
     text: "This is awful I will never eat at your restaurant again!",
     backgroundSize: 1263,
+  },
+  // question scene, seven scene
+  {
+    sceneID: 6,
+    scene: "question",
+    background: "src/assets/employee_background.png",
+    avatar: "src/assets/micperson.png",
+    question: "How would you deal with this situation?",
+    options: [
+      {
+        option: "Stay calm and apologize to him",
+      },
+      {
+        option: "Hang up call and ignore it",
+      },
+      {
+        option: "Transfer the call to the manager",
+      },
+    ],
+    answer: "Stay calm and apologize to him",
+    backgroundSize: 963,
   },
 ];
 
@@ -88,6 +109,7 @@ const StoryBased = () => {
         style={{ backgroundImage: `url(${scenes[nextSceneCount].background})` }}
         className="container"
       >
+        {/* Button  */}
         {nextSceneCount == scenes.length - 1 ? (
           <button className="start_btn" onClick={nextScene}>
             Done!
@@ -109,6 +131,7 @@ const StoryBased = () => {
           </>
         )}
 
+        {/* Process bar */}
         {!start ? (
           <div className="progress_wrapper">
             <div className="info">
@@ -158,15 +181,50 @@ const StoryBased = () => {
                 <div className="employeeSpeakbubble">
                   <p className="hisir">{scenes[nextSceneCount].text}</p>
                 </div>
+                <div
+                  style={{
+                    backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+                    backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+                  }}
+                  className="employeePosition"
+                ></div>
               </>
             ) : (
               <>
-                <div className="customerSpeakbubble">
-                  <p className="hisir">{scenes[nextSceneCount].text}</p>
-                </div>
+                {scenes[nextSceneCount].scene === "question" ? (
+                  <>
+                    <div
+                      style={{
+                        backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+                        backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+                      }}
+                      className="employeePosition"
+                    ></div>
+                    <div className="questionScene">
+                      <p className="questionText">
+                        {scenes[nextSceneCount].question}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    <div className="customerSpeakbubble">
+                      <p className="hisir">{scenes[nextSceneCount].text}</p>
+                    </div>
+                    <div
+                      style={{
+                        backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+                        backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+                      }}
+                      className="customerPosition"
+                    ></div>
+                  </div>
+                )}
               </>
             )}
-            <div
+
+            {/* Avatar display */}
+            {/* <div
               style={{
                 backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
                 backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
@@ -176,7 +234,7 @@ const StoryBased = () => {
                   ? "employeePosition"
                   : "customerPosition"
               }
-            ></div>
+            ></div> */}
           </div>
         )}
       </div>
