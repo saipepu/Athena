@@ -1,140 +1,154 @@
-import React, { useEffect, useReducer, useState } from 'react'
-import './text_game.css'
-import Question from '../../components/StoryBased/Question'
+import React, { useEffect, useReducer, useState } from "react";
+import "./text_game.css";
+import Question from "../../components/StoryBased/Question";
 
-
-const sampleData = null;
-var images = [
-  "src/assets/talky_talky_startscreen.png", // start scene
-  "src/assets/employee_background.png", // employee background
-  "src/assets/third_scene_backgorund.png"
-]
-
-var imgPath = "url(" + images[0] + ")"
-
-
+const scenes = [
+  // First scene
+  {
+    sceneID: 0,
+    scene: "start",
+    background: "src/assets/talky_talky_startscreen.png",
+    avatar: "src/assets/start_model.png",
+    title: "Talky-Talky",
+    backgroundSize: undefined,
+  },
+  // Second scene
+  {
+    sceneID: 1,
+    scene: "employee",
+    background: "src/assets/employee_background.png",
+    avatar: "src/assets/micperson.png",
+    speakbox: "src/assets/speakbubble.png",
+    text: "Hi sir! How can I help you today?",
+    backgroundSize: 963,
+  },
+  // Third scene
+  {
+    sceneID: 2,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/customer_third.png",
+    speakbox: "src/assets/speakbubble.png",
+    text: "I want to reserve table for tonight at 8 pm.",
+    backgroundSize: 1203,
+  },
+];
 
 const StoryBased = () => {
-  const [next, setNext] = useState(1);
-  const [isVisible, setIsVisible] = useState(false)
-  const [isStartingSceneModel, setIsStartingSceneModel] = useState(true);
+  const [nextSceneCount, setNextSceneCount] = useState(0);
+  const [start, setStart] = useState(true);
+  const [next, setNext] = useState(false);
+  console.log(nextSceneCount);
+  console.log(scenes.length - 1);
 
-  const arrayTextNodes = [
-    {
-      id: 1,
-      text: "Question 1",
-      options: [
-        {
-          text: "Option 1",
-          next: 2,
-        },
-        {
-          text: "Option 2",
-        },
-        {
-          text: "Option 3",
-        },
-        {
-          text: "Option 4",
-        },
-      ],
-      answer: "Option 1"
-    },
+  const nextScene = () => {
+    if (nextSceneCount === scenes.length - 1) {
+      return nextSceneCount;
+    } else {
+      setNextSceneCount(nextSceneCount + 1);
+    }
+    setStart(false);
+  };
 
-    {
-      id: 2,
-      text: "Question 2",
-      options: [
-        {
-          text: "Option 1",
-        },
-        {
-          text: "Option 2",
-          next: 3,
-        },
-        {
-          text: "Option 3",
-        },
-        {
-          text: "Option 4",
-        },
-      ],
-      answer: "Option 2"
-    },
-  ];
+  console.log(start);
 
-  useEffect(() => {
-    document.getElementById('submitform').reset()
-  }, [next]);
+  return (
+    <div className="wrapper">
+      <div
+        style={{ backgroundImage: `url(${scenes[nextSceneCount].background})` }}
+        className="container"
+      >
+        {nextSceneCount == scenes.length - 1 ? (
+          <button className="start_btn" onClick={nextScene}>
+            Done!
+          </button>
+        ) : (
+          <>
+            {start ? (
+              <div>
+                <button className="start_btn" onClick={nextScene}>
+                  Start!
+                </button>
+                <h1 className="title">Talky-Talky</h1>
+              </div>
+            ) : (
+              <button className="start_btn" onClick={nextScene}>
+                Next!
+              </button>
+            )}
+          </>
+        )}
 
-  // function submitAnswer(e, each, textNode) {
-  //   if (textNode.answer === each.text) {
-  //     setTimeout(() => {
-  //       setNext(each.next)
-  //     }, 500);
-  //   }
-  // }
+        {!start ? (
+          <div className="progress_wrapper">
+            <div className="info">
+              <div className="name_container">
+                <p className="rank">A</p>
+                <p className="name">5 ATHENA</p>
+              </div>
+              <div className="avatar">
+                <img
+                  src="src/assets/avatar.png"
+                  alt="avatar"
+                  className="avatar_img"
+                />
+              </div>
+            </div>
+            <div className="progress_container">
+              <div className="title">Experience Bar</div>
+              <div className="progress">
+                <img
+                  src="src/assets/exp_img.png"
+                  alt="exp"
+                  className="exp_img"
+                />
+                <div className="progress_bar">
+                  <div className="bar" id="bar"></div>
+                  <div className="xp">XP</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
 
-  function secondScene(startTime, imageIndex) {
-    useEffect(() => {
-      if (sampleData === null) {
-        const toRef = setTimeout(() => {
-          // close first scene
-          setIsStartingSceneModel(false);
-          imgPath = "url(" + images[imageIndex] + ")"
-          clearTimeout(toRef);
-        }, startTime);
-      }
-    }, [sampleData]);
-
-    useEffect(() => {
-      const timeoutId = setTimeout(() => {
-        // Show models in second scene
-        setIsVisible(true);
-      }, 2500);
-      return () => clearTimeout(timeoutId);
-    }, []);
-  }
-
-  function secondSceneEnd(startTime) {
-    useEffect(() => {
-      const timeoutId = setTimeout(() => {
-        setIsVisible(false);
-      }, startTime);
-      return () => clearTimeout(timeoutId);
-    }, [isVisible]);
-  }
-
-  function showTextNode(textNodesIndex) {
-    const textNode = arrayTextNodes.find(
-      (arrayTextNodes) => arrayTextNodes.id === textNodesIndex
-    );
-
-    // Second scene
-    // startScene(2000, 0)
-    secondScene(2000, 1)
-    secondSceneEnd(1000)
-
-    return (
-      <div style={{ backgroundImage: `${imgPath}` }} className='container'>
-        <h1 style={{ display: isStartingSceneModel? 'block' : 'none' }} className='title'>Talky-Talky</h1>
-        <div style={{ display: isStartingSceneModel? 'block' : 'none' }} className="startingscenemodel"></div>
+        {start ? (
+          <div
+            style={{
+              backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+              backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+            }}
+            className="StartPosition"
+          >
+            {console.log(
+              scenes[nextSceneCount].scene === "employee"
+                ? "employeePosition"
+                : "customerPosition"
+            )}
+          </div>
+        ) : (
+          <div
+            style={{
+              backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+              backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+            }}
+            className={
+              scenes[nextSceneCount].scene === "employee"
+                ? "employeePosition"
+                : "customerPosition"
+            }
+          ></div>
+        )}
 
         {/* Employee Scene */}
-        <div style={{display: isVisible? 'block' : 'none'}} className='speakbubble'>
-          <p className='hisir'>Hi sir! How can I help you today?</p>
-        </div>
-        <div style={{display: isVisible? 'block' : 'none'}} className='micperson'></div>
-
-        <div >
-
-        </div>
-
-        <Question textNode={textNode} next={next}/>
+        {/* <div className='speakbubble'>
+            <p className='hisir'>Hi sir! How can I help you today?</p>
+          </div>
+          <div className='micperson'></div> */}
+        {/* <Question textNode={textNode} nextSceneCount={nextSceneCount} /> */}
       </div>
-    );
-  }
-  return <div className='wrapper'>{showTextNode(next)}</div>;
-
-}
+    </div>
+  );
+};
 export default StoryBased;
