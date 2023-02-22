@@ -101,7 +101,12 @@ const StoryBased = () => {
     setStart(false);
   };
 
-  console.log(start);
+  const backScene = () => {
+    if (nextSceneCount >= scenes.length - 1) {
+      setNextSceneCount(nextSceneCount - 1);
+    }
+    setNextSceneCount(nextSceneCount - 1);
+  };
 
   return (
     <div className="wrapper">
@@ -111,9 +116,14 @@ const StoryBased = () => {
       >
         {/* Button  */}
         {nextSceneCount == scenes.length - 1 ? (
-          <button className="start_btn" onClick={nextScene}>
-            Done!
-          </button>
+          <div>
+            <button className="start_btn" onClick={nextScene}>
+              Done!
+            </button>
+            <button className="back_btn" onClick={backScene}>
+              Back
+            </button>
+          </div>
         ) : (
           <>
             {start ? (
@@ -124,9 +134,20 @@ const StoryBased = () => {
                 <h1 className="title">Talky-Talky</h1>
               </div>
             ) : (
-              <button className="start_btn" onClick={nextScene}>
-                Next!
-              </button>
+              <div>
+                <button className="start_btn" onClick={nextScene}>
+                  Next!
+                </button>
+                {scenes[nextSceneCount].scene === "start" ? (
+                  <></>
+                ) : (
+                  <>
+                    <button className="back_btn" onClick={backScene}>
+                      Back
+                    </button>
+                  </>
+                )}
+              </div>
             )}
           </>
         )}
@@ -208,16 +229,40 @@ const StoryBased = () => {
                   </>
                 ) : (
                   <div>
-                    <div className="customerSpeakbubble">
-                      <p className="hisir">{scenes[nextSceneCount].text}</p>
-                    </div>
-                    <div
-                      style={{
-                        backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
-                        backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
-                      }}
-                      className="customerPosition"
-                    ></div>
+                    {scenes[nextSceneCount].scene === "start" ? (
+                      <></>
+                    ) : (
+                      <>
+                        <div className="customerSpeakbubble">
+                          <p className="hisir">{scenes[nextSceneCount].text}</p>
+                        </div>
+                      </>
+                    )}
+                    {scenes[nextSceneCount].scene === "start" ? (
+                      <>
+                        <div
+                          style={{
+                            backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+                            backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+                          }}
+                          className="StartPosition"
+                        ></div>
+                        <h1 className="title">Talky-Talky</h1>
+                        <button className="start_btn" onClick={nextScene}>
+                          Start!
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          style={{
+                            backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+                            backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+                          }}
+                          className="customerPosition"
+                        ></div>
+                      </>
+                    )}
                   </div>
                 )}
               </>

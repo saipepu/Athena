@@ -43,6 +43,22 @@
   background: url(src/assets/speakbubble.png);
 }
 
+#remove {
+}
+
+.back_btn {
+  position: absolute;
+  bottom: 100px;
+  left: 100px;
+  background: #ee5253;
+  border-radius: 15px;
+  padding: 20px 60px;
+  font-size: 45px;
+  font-weight: 600;
+  color: white;
+  z-index: 10;
+}
+
 .startingscenemodel {
   position: absolute;
   width: 1920px;
