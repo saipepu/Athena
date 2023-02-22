@@ -179,13 +179,6 @@ const StoryBased = () => {
             ></div>
           </div>
         )}
-
-        {/* Employee Scene */}
-        {/* <div className='speakbubble'>
-            <p className='hisir'>Hi sir! How can I help you today?</p>
-          </div>
-          <div className='micperson'></div> */}
-        {/* <Question textNode={textNode} nextSceneCount={nextSceneCount} /> */}
       </div>
     </div>
   );
