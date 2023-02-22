@@ -1,118 +1,159 @@
-.speakbubble {
-    position: absolute;
-    width: 1122px;
-    height: 531px;
-    left: 10px;
-    top: 154px;
+.customerPosition {
+  position: absolute;
+  width: 874px;
+  height: 943px;
+  left: 41px;
+  top: 186px;
+}
 
-    background: url("src/assets/speakbubble.png");
+.StartPosition {
+  position: absolute;
+  width: 1063px;
+  height: 938px;
+  left: 51px;
+  top: -36px;
+}
+
+.employeePosition {
+  position: absolute;
+  width: 949px;
+  height: 680px;
+  left: 239px;
+  top: 239px;
+  background-size: 963px;
+}
+
+.speakbubble {
+  position: absolute;
+  width: 1122px;
+  height: 531px;
+  left: 10px;
+  top: 154px;
+
+  background: url("src/assets/speakbubble.png");
 }
 
 .startingscenemodel {
-    position: absolute;
-    width: 1920px;
-    height: 1136px;
-    left: -1287px;
-    top: -30px;
+  position: absolute;
+  width: 1920px;
+  height: 1136px;
+  left: -1287px;
+  top: -30px;
 
-    background: url("src/assets/start_model.png");
+  /* background: url("src/assets/start_model.png"); */
 }
 
 .employeebackground {
-    position: relative;
-    width: 100%;
-    height: 100%;
-
-
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .micperson {
-    /* Gaia (1) 1 */
-    position: absolute;
-    width: 1537px;
-    height: 1027px;
-    left: 420px;
-    top: 225px;
+  /* Gaia (1) 1 */
+  position: absolute;
+  width: 1537px;
+  height: 1027px;
+  left: 420px;
+  top: 225px;
 
-    background: url("src/assets/micperson.png");
+  background: url("src/assets/micperson.png");
 }
 
 /* Hi sir! How can I help you today? */
 .hisir {
-    position: absolute;
-    width: 518px;
-    height: 302px;
-    left: 326px;
-    top: 85px;
+  position: absolute;
+  width: 518px;
+  height: 302px;
+  left: 326px;
+  top: 85px;
 
-    font-style: normal;
-    font-weight: 400;
-    font-size: 64px;
-    line-height: 80px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 80px;
 
-    color: #182227;
+  color: #182227;
 }
 
 .title {
-    /* Talky-Talky */
+  /* Talky-Talky */
 
+  position: absolute;
+  width: 763px;
+  height: 182px;
+  left: 550px;
+  top: 400px;
 
-position: absolute;
-width: 763px;
-height: 182px;
-left: 550px;
-top: 400px;
+  font-family: "Poppins";
+  font-style: italic;
+  font-weight: 500;
+  font-size: 130px;
+  line-height: 140%;
+  /* identical to box height, or 182px */
 
-font-family: 'Poppins';
-font-style: italic;
-font-weight: 500;
-font-size: 130px;
-line-height: 140%;
-/* identical to box height, or 182px */
-
-
-color: #FFFFFF;
+  color: #ffffff;
 }
 
 .questionandanswer {
-    height: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper {
-    background: #eeeeee;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eeeeee;
+  padding: 50px;
 }
 
 .container {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    box-shadow: 0px 0px 10px 0px #00000005;
-    border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px #00000005;
+  border-radius: 10px;
+}
+
+.start_btn {
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+  background: #ee5253;
+  border-radius: 15px;
+  padding: 20px 60px;
+  font-size: 45px;
+  font-weight: 600;
+  color: white;
+  z-index: 10;
 }
 
 input {
-    display: none;
+  display: none;
 }
 
 label {
-    cursor: pointer;
-    padding: 5px;
-    border: 1px solid #CCC;
-    cursor: pointer;
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }
 
 /* input:checked+label {
     background: red;
 } */
 
-input:checked+.correctanswer {
-    background: rgb(5, 255, 5);
+input:checked + .correctanswer {
+  background: rgb(5, 255, 5);
 }
 
-input:checked+.wronganswer {
-    background: red;
+input:checked + .wronganswer {
+  background: red;
 }
