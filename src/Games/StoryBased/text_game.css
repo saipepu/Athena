@@ -23,14 +23,22 @@
   background-size: 963px;
 }
 
-.speakbubble {
+.employeeSpeakbubble {
   position: absolute;
-  width: 1122px;
-  height: 531px;
-  left: 10px;
-  top: 154px;
+  width: 889px;
+  height: 523px;
+  left: -154px;
+  top: 102px;
+  background: url(src/assets/speakbubble.png);
+}
 
-  background: url("src/assets/speakbubble.png");
+.customerSpeakbubble {
+  position: absolute;
+  width: 889px;
+  height: 523px;
+  left: 303px;
+  top: 102px;
+  background: url(src/assets/speakbubble.png);
 }
 
 .startingscenemodel {
@@ -63,16 +71,14 @@
 /* Hi sir! How can I help you today? */
 .hisir {
   position: absolute;
-  width: 518px;
-  height: 302px;
-  left: 326px;
-  top: 85px;
-
+  width: 555px;
+  height: 324px;
+  left: 300px;
+  top: 68px;
   font-style: normal;
   font-weight: 400;
   font-size: 64px;
   line-height: 80px;
-
   color: #182227;
 }
 

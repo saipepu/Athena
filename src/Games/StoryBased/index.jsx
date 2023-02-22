@@ -32,6 +32,36 @@ const scenes = [
     text: "I want to reserve table for tonight at 8 pm.",
     backgroundSize: 1203,
   },
+  // Fourth scene
+  {
+    sceneID: 3,
+    scene: "employee",
+    background: "src/assets/employee_background.png",
+    avatar: "src/assets/micperson.png",
+    speakbox: "src/assets/speakbubble.png",
+    text: "Sorry, we do not take reservation on weekend sir.",
+    backgroundSize: 963,
+  },
+  // Fifth scene
+  {
+    sceneID: 3,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/fifth_model.png",
+    speakbox: "src/assets/speakbubble.png",
+    text: "Why don't you make it clear on the website?",
+    backgroundSize: 1263,
+  },
+  // six scene
+  {
+    sceneID: 3,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/six_model.png",
+    speakbox: "src/assets/speakbubble.png",
+    text: "This is awful I will never eat at your restaurant again!",
+    backgroundSize: 1263,
+  },
 ];
 
 const StoryBased = () => {
@@ -120,25 +150,34 @@ const StoryBased = () => {
               backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
             }}
             className="StartPosition"
-          >
-            {console.log(
-              scenes[nextSceneCount].scene === "employee"
-                ? "employeePosition"
-                : "customerPosition"
-            )}
-          </div>
-        ) : (
-          <div
-            style={{
-              backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
-              backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
-            }}
-            className={
-              scenes[nextSceneCount].scene === "employee"
-                ? "employeePosition"
-                : "customerPosition"
-            }
           ></div>
+        ) : (
+          <div>
+            {scenes[nextSceneCount].scene === "employee" ? (
+              <>
+                <div className="employeeSpeakbubble">
+                  <p className="hisir">{scenes[nextSceneCount].text}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="customerSpeakbubble">
+                  <p className="hisir">{scenes[nextSceneCount].text}</p>
+                </div>
+              </>
+            )}
+            <div
+              style={{
+                backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+                backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+              }}
+              className={
+                scenes[nextSceneCount].scene === "employee"
+                  ? "employeePosition"
+                  : "customerPosition"
+              }
+            ></div>
+          </div>
         )}
 
         {/* Employee Scene */}
