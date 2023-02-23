@@ -84,21 +84,21 @@
   padding: 10px;
   border-radius: 10px;
 
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
   margin-bottom: 30px;
-  
-  color: #182227;}
+
+  color: #182227;
+}
 
 #submitform {
   position: absolute;
   top: 230px;
   left: 200px;
   width: 500px;
-
 }
 
 .questionText {
@@ -218,9 +218,9 @@ label {
 } */
 
 input:checked + .correctanswer {
-  background: #D8FEBB;
+  background: #d8febb;
 }
 
 input:checked + .wronganswer {
-  background: #FEDFE1;;
+  background: #fedfe1;
 }

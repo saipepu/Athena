@@ -117,11 +117,10 @@ const StoryBased = () => {
   const checkAnswerBackgorundColor = (each) => {
     if (scenes[nextSceneCount].answer === each.option) {
       setButtonColor("green");
-    }
-    else {
+    } else {
       setButtonColor("red");
     }
-  }
+  };
 
   return (
     <div className="wrapper">
@@ -245,8 +244,7 @@ const StoryBased = () => {
                       <form id="submitform">
                         {scenes[nextSceneCount].options.map((each, key) => {
                           return (
-                            <div key={key}
-                            className="answerOptions">
+                            <div key={key} className="answerOptions">
                               <span key={key}>
                                 <input
                                   type="radio"
@@ -255,15 +253,16 @@ const StoryBased = () => {
                                   name="radio"
                                 />
                                 <label
-                                onClick={submitAnswer(each)}
+                                  onClick={submitAnswer(each)}
                                   className={
-                                    scenes[nextSceneCount].answer === each.option
+                                    scenes[nextSceneCount].answer ===
+                                    each.option
                                       ? "correctanswer"
                                       : "wronganswer"
                                   }
                                   htmlFor={key}
                                 >
-                                  {key+1}. {each.option}
+                                  {key + 1}. {each.option}
                                 </label>
                               </span>
                             </div>
