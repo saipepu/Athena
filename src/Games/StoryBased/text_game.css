@@ -71,19 +71,26 @@
 
 .questionScene {
   position: absolute;
-  width: 571px;
-  height: 74px;
   left: 159px;
   top: 224px;
+  background-color: #fff;
+  border-radius: 10px;
 
-  background: url("src/assets/question_box.png");
+  /* background: url("src/assets/question_box.png"); */
+}
+
+.answerOptions {
+  box-sizing: border-box;
+  background: #ffffff;
+  width: 320px;
+  border: 1px solid #a0a0a0;
+  padding: 15px;
+  border-radius: 10px;
 }
 
 .questionText {
   /* How would you deal with this situation? */
   padding: 15px;
-  padding-left: 25px;
-
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
@@ -199,9 +206,9 @@ label {
 } */
 
 input:checked + .correctanswer {
-  background: rgb(5, 255, 5);
+  background: #D8FEBB;
 }
 
 input:checked + .wronganswer {
-  background: red;
+  background: #FEDFE1;;
 }

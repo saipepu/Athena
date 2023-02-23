@@ -82,6 +82,7 @@ const scenes = [
     ],
     answer: "Stay calm and apologize to him",
     backgroundSize: 963,
+    goToQuestionSceneID: 5,
   },
 ];
 
@@ -106,6 +107,14 @@ const StoryBased = () => {
       setNextSceneCount(nextSceneCount - 1);
     }
     setNextSceneCount(nextSceneCount - 1);
+  };
+
+  const submitAnswer = (each) => {
+    if (scenes[nextSceneCount].answer === each.option) {
+      console.log("Hello")
+      // setNextSceneCount(scenes[nextSceneCount].goToQuestionSceneID);
+      // document.getElementById('submitform').reset()
+    }
   };
 
   return (
@@ -221,10 +230,39 @@ const StoryBased = () => {
                       }}
                       className="employeePosition"
                     ></div>
-                    <div className="questionScene">
-                      <p className="questionText">
-                        {scenes[nextSceneCount].question}
-                      </p>
+                    <div>
+                      <div className="questionScene">
+                        <p className="questionText">
+                          {scenes[nextSceneCount].question}
+                        </p>
+                      </div>
+                      <form id="submitform">
+                        {scenes[nextSceneCount].options.map((each, key) => {
+                          return (
+                            <div className="answerOptions">
+                              <span key={key}>
+                                <input
+                                  type="radio"
+                                  key={key}
+                                  id={key}
+                                  onClick={submitAnswer(each)}
+                                  name="radio"
+                                />
+                                <label
+                                  className={
+                                    scenes[nextSceneCount].answer === each.text
+                                      ? "correctanswer"
+                                      : "wronganswer"
+                                  }
+                                  htmlFor={key}
+                                >
+                                  {key+1}. {each.option}
+                                </label>
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </form>
                     </div>
                   </>
                 ) : (
