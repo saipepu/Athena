@@ -1,6 +1,5 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useState } from "react";
 import "./text_game.css";
-import Question from "../../components/StoryBased/Question";
 
 const scenes = [
   // First scene
