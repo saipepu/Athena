@@ -2,7 +2,7 @@
   position: absolute;
   width: 874px;
   height: 943px;
-  left: 41px;
+  left: 0px;
   top: 186px;
 }
 
@@ -30,7 +30,7 @@
   width: 889px;
   height: 523px;
   left: -154px;
-  top: 102px;
+  top: 75px;
   background: url(src/assets/speakbubble.png);
 }
 
@@ -41,9 +41,6 @@
   left: 303px;
   top: 102px;
   background: url(src/assets/speakbubble.png);
-}
-
-#remove {
 }
 
 .back_btn {
@@ -72,7 +69,7 @@
 .questionScene {
   position: absolute;
   left: 159px;
-  top: 224px;
+  top: 120px;
   background-color: #fff;
   border-radius: 10px;
 
@@ -82,10 +79,26 @@
 .answerOptions {
   box-sizing: border-box;
   background: #ffffff;
-  width: 320px;
+  width: 450px;
   border: 1px solid #a0a0a0;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 30px;
+  
+  color: #182227;}
+
+#submitform {
+  position: absolute;
+  top: 230px;
+  left: 200px;
+  width: 500px;
+
 }
 
 .questionText {
@@ -138,7 +151,7 @@
   width: 763px;
   height: 182px;
   left: 550px;
-  top: 400px;
+  top: 300px;
 
   font-family: "Poppins";
   font-style: italic;
@@ -197,7 +210,6 @@ input {
 label {
   cursor: pointer;
   padding: 5px;
-  border: 1px solid #ccc;
   cursor: pointer;
 }
 

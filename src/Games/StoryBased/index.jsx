@@ -82,7 +82,7 @@ const scenes = [
     ],
     answer: "Stay calm and apologize to him",
     backgroundSize: 963,
-    goToQuestionSceneID: 5,
+    goToQuestionSceneID: 0,
   },
 ];
 
@@ -90,8 +90,7 @@ const StoryBased = () => {
   const [nextSceneCount, setNextSceneCount] = useState(0);
   const [start, setStart] = useState(true);
   const [next, setNext] = useState(false);
-  console.log(nextSceneCount);
-  console.log(scenes.length - 1);
+  const [buttonColor, setButtonColor] = useState("");
 
   const nextScene = () => {
     if (nextSceneCount === scenes.length - 1) {
@@ -111,11 +110,18 @@ const StoryBased = () => {
 
   const submitAnswer = (each) => {
     if (scenes[nextSceneCount].answer === each.option) {
-      console.log("Hello")
       // setNextSceneCount(scenes[nextSceneCount].goToQuestionSceneID);
-      // document.getElementById('submitform').reset()
     }
   };
+
+  const checkAnswerBackgorundColor = (each) => {
+    if (scenes[nextSceneCount].answer === each.option) {
+      setButtonColor("green");
+    }
+    else {
+      setButtonColor("red");
+    }
+  }
 
   return (
     <div className="wrapper">
@@ -239,18 +245,19 @@ const StoryBased = () => {
                       <form id="submitform">
                         {scenes[nextSceneCount].options.map((each, key) => {
                           return (
-                            <div className="answerOptions">
+                            <div key={key}
+                            className="answerOptions">
                               <span key={key}>
                                 <input
                                   type="radio"
                                   key={key}
                                   id={key}
-                                  onClick={submitAnswer(each)}
                                   name="radio"
                                 />
                                 <label
+                                onClick={submitAnswer(each)}
                                   className={
-                                    scenes[nextSceneCount].answer === each.text
+                                    scenes[nextSceneCount].answer === each.option
                                       ? "correctanswer"
                                       : "wronganswer"
                                   }
