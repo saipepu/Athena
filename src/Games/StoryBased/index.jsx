@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./text_game.css";
+import readXlsxFile from "read-excel-file";
 
 const scenes = [
   // First scene
@@ -8,7 +9,7 @@ const scenes = [
     scene: "start",
     background: "src/assets/talky_talky_startscreen.png",
     avatar: "src/assets/start_model.png",
-    title: "Talky-Talky",
+    text: "Talky-Talky",
     backgroundSize: undefined,
   },
   // Second scene
@@ -17,7 +18,6 @@ const scenes = [
     scene: "employee",
     background: "src/assets/employee_background.png",
     avatar: "src/assets/micperson.png",
-    // speakbox: "src/assets/speakbubble.png",
     text: "Hi sir! How can I help you today?",
     backgroundSize: 963,
   },
@@ -27,7 +27,6 @@ const scenes = [
     scene: "customer",
     background: "src/assets/third_scene_backgorund.png",
     avatar: "src/assets/customer_third.png",
-    // speakbox: "src/assets/speakbubble.png",
     text: "I want to reserve table for tonight at 8 pm.",
     backgroundSize: 1203,
   },
@@ -37,7 +36,6 @@ const scenes = [
     scene: "employee",
     background: "src/assets/employee_background.png",
     avatar: "src/assets/micperson.png",
-    // speakbox: "src/assets/speakbubble.png",
     text: "Sorry, we do not take reservation on weekend sir.",
     backgroundSize: 963,
   },
@@ -47,7 +45,6 @@ const scenes = [
     scene: "customer",
     background: "src/assets/third_scene_backgorund.png",
     avatar: "src/assets/fifth_model.png",
-    // speakbox: "src/assets/speakbubble.png",
     text: "Why don't you make it clear on the website?",
     backgroundSize: 1263,
   },
@@ -57,7 +54,6 @@ const scenes = [
     scene: "customer",
     background: "src/assets/third_scene_backgorund.png",
     avatar: "src/assets/six_model.png",
-    // speakbox: "src/assets/speakbubble.png",
     text: "This is awful I will never eat at your restaurant again!",
     backgroundSize: 1263,
   },
@@ -281,7 +277,7 @@ const StoryBased = () => {
                           }}
                           className="StartPosition"
                         ></div>
-                        <h1 className="title">Talky-Talky</h1>
+                        <h1 className="title">scenes[nextSceneCount].text</h1>
                         <button className="start_btn" onClick={nextScene}>
                           Start!
                         </button>
