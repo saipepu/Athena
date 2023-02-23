@@ -127,7 +127,7 @@ const StoryBased = () => {
     <div className="wrapper">
       <div
         style={{ backgroundImage: `url(${scenes[nextSceneCount].background})` }}
-        className="container"
+        className="Scontainer"
       >
         {/* Button  */}
         {nextSceneCount == scenes.length - 1 ? (
