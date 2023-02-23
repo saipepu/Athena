@@ -1,0 +1,226 @@
+.customerPosition {
+  position: absolute;
+  width: 874px;
+  height: 943px;
+  left: 0px;
+  top: 186px;
+}
+
+.StartPosition {
+  position: absolute;
+  width: 1063px;
+  height: 938px;
+  left: 51px;
+  top: -36px;
+}
+
+.employeePosition {
+  position: absolute;
+  width: 949px;
+  height: 680px;
+  left: 289px;
+
+  /* left: 239px; */
+  top: 239px;
+  background-size: 963px;
+}
+
+.employeeSpeakbubble {
+  position: absolute;
+  width: 889px;
+  height: 523px;
+  left: -154px;
+  top: 75px;
+  background: url(src/assets/speakbubble.png);
+}
+
+.customerSpeakbubble {
+  position: absolute;
+  width: 889px;
+  height: 523px;
+  left: 303px;
+  top: 102px;
+  background: url(src/assets/speakbubble.png);
+}
+
+.back_btn {
+  position: absolute;
+  bottom: 100px;
+  left: 100px;
+  background: #ee5253;
+  border-radius: 15px;
+  padding: 20px 60px;
+  font-size: 45px;
+  font-weight: 600;
+  color: white;
+  z-index: 10;
+}
+
+.startingscenemodel {
+  position: absolute;
+  width: 1920px;
+  height: 1136px;
+  left: -1287px;
+  top: -30px;
+
+  /* background: url("src/assets/start_model.png"); */
+}
+
+.questionScene {
+  position: absolute;
+  left: 159px;
+  top: 120px;
+  background-color: #fff;
+  border-radius: 10px;
+
+  /* background: url("src/assets/question_box.png"); */
+}
+
+.answerOptions {
+  box-sizing: border-box;
+  background: #ffffff;
+  width: 450px;
+  border: 1px solid #a0a0a0;
+  padding: 10px;
+  border-radius: 10px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 30px;
+  
+  color: #182227;}
+
+#submitform {
+  position: absolute;
+  top: 230px;
+  left: 200px;
+  width: 500px;
+
+}
+
+.questionText {
+  /* How would you deal with this situation? */
+  padding: 15px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 39px;
+
+  color: #182227;
+}
+
+.employeebackground {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.micperson {
+  /* Gaia (1) 1 */
+  position: absolute;
+  width: 1537px;
+  height: 1027px;
+  left: 420px;
+  top: 225px;
+
+  background: url("src/assets/micperson.png");
+}
+
+/* Hi sir! How can I help you today? */
+.hisir {
+  position: absolute;
+  width: 555px;
+  height: 324px;
+  left: 300px;
+  top: 68px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 80px;
+  color: #182227;
+}
+
+.title {
+  /* Talky-Talky */
+
+  position: absolute;
+  width: 763px;
+  height: 182px;
+  left: 550px;
+  top: 300px;
+
+  font-family: "Poppins";
+  font-style: italic;
+  font-weight: 500;
+  font-size: 130px;
+  line-height: 140%;
+  /* identical to box height, or 182px */
+
+  color: #ffffff;
+}
+
+.questionandanswer {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eeeeee;
+  padding: 50px;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px #00000005;
+  border-radius: 10px;
+}
+
+.start_btn {
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+  background: #ee5253;
+  border-radius: 15px;
+  padding: 20px 60px;
+  font-size: 45px;
+  font-weight: 600;
+  color: white;
+  z-index: 10;
+}
+
+input {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* input:checked+label {
+    background: red;
+} */
+
+input:checked + .correctanswer {
+  background: #D8FEBB;
+}
+
+input:checked + .wronganswer {
+  background: #FEDFE1;;
+}
