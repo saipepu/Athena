@@ -84,6 +84,149 @@ const scenes = [
     text: "Hello Sir! How can I help you?",
     backgroundSize: 963,
   },
+  {
+    sceneID: 9,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/customer_third.png",
+    text: "Hi, I would like to request a change in my reservation's date",
+    backgroundSize: 1203,
+  },
+  {
+    sceneID: 10,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/customer_third.png",
+    text: "If possible, can I move my reservation date to the 15th of Feb?",
+    backgroundSize: 1203,
+  },
+  {
+    sceneID: 11,
+    scene: "employee",
+    background: "src/assets/employee_background.png",
+    avatar: "src/assets/micperson.png",
+    text: "That is possible but there will be a fee for changing date of reservation",
+    backgroundSize: 963,
+  },
+  {
+    sceneID: 12,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/fifth_model.png",
+    text: "What? I thought there were not fees for changing",
+    backgroundSize: 1263,
+  },
+  {
+    sceneID: 12,
+    scene: "employee",
+    background: "src/assets/employee_background.png",
+    avatar: "src/assets/micperson.png",
+    text: "I'm sorry but if you change 3 days prior, we will charge a fee sir.",
+    backgroundSize: 963,
+  },
+  {
+    sceneID: 13,
+    scene: "question",
+    background: "src/assets/employee_background.png",
+    question:
+      "The customer is complaining, what should you do in this situation?",
+    options: [
+      {
+        option:
+          "Apologize and tell him that they will make it clear on the website in the future",
+        goToQuestionSceneID: 5,
+      },
+      {
+        option:
+          "Apologize to him and suggest a new promotion that comes with the bookings",
+        goToQuestionSceneID: 6,
+      },
+    ],
+    backgroundSize: 963,
+  },
+  {
+    sceneID: 14,
+    scene: "employee",
+    background: "src/assets/employee_background.png",
+    avatar: "src/assets/micperson.png",
+    text: "We're really sorry about this, we will make it more clear on the website!",
+    backgroundSize: 963,
+  },
+  {
+    sceneID: 15,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/customer_third.png",
+    text: "Okay! then can I change to 14th of Feb? That has no fees right?",
+    backgroundSize: 1203,
+  },
+  {
+    sceneID: 16,
+    scene: "question",
+    background: "src/assets/employee_background.png",
+    question: "The customer is louder and has more energy, what would you do?",
+    options: [
+      {
+        option: "Stay Calm and control the tone",
+        goToQuestionSceneID: 5,
+      },
+      {
+        option: "Be adaptable and match the energy of the customer",
+        goToQuestionSceneID: 6,
+      },
+    ],
+    backgroundSize: 963,
+  },
+  {
+    sceneID: 17,
+    scene: "employee",
+    background: "src/assets/employee_background.png",
+    avatar: "src/assets/micperson.png",
+    text: "Yes, that would incur no extra fees. Would you like to proceed?",
+    backgroundSize: 963,
+  },
+  {
+    sceneID: 18,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/customer_third.png",
+    text: "Yes, I would like to proceed with that option!",
+    backgroundSize: 1203,
+  },
+  {
+    sceneID: 19,
+    scene: "employee",
+    background: "src/assets/employee_background.png",
+    avatar: "src/assets/micperson.png",
+    text: "Okay, your reservations has been changed. ",
+    backgroundSize: 963,
+  },
+  {
+    sceneID: 20,
+    scene: "question",
+    background: "src/assets/employee_background.png",
+    question: "The problem has been solve. What will you do next?",
+    options: [
+      {
+        option: "Ask if there is anything else he needs?",
+        goToQuestionSceneID: 5,
+      },
+      {
+        option:
+          "Just tell him the change is done and say Thank you for using their service",
+        goToQuestionSceneID: 6,
+      },
+    ],
+    backgroundSize: 963,
+  },
+  {
+    sceneID: 21,
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/customer_third.png",
+    text: "That is it now, Thank you so much!",
+    backgroundSize: 1203,
+  },
 ];
 
 const StoryBased = () => {

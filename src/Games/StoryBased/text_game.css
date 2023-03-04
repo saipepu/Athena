@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+
 .customerPosition {
   position: absolute;
   width: 874px;
@@ -72,12 +74,12 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 60%;
+  width: 74%;
   z-index: 30;
   position: absolute;
   flex-direction: column;
   position: absolute;
-  left: 14%;
+  left: 10%;
   top: 27%;
 }
 
@@ -135,15 +137,16 @@
 /* Hi sir! How can I help you today? */
 .hisir {
   position: absolute;
-  width: 555px;
+  font-family: "Lexend";
+  color: #182227;
+  width: 562px;
   height: 324px;
-  left: 300px;
+  left: 295px;
   top: 68px;
   font-style: normal;
   font-weight: 400;
-  font-size: 64px;
+  font-size: 60px;
   line-height: 80px;
-  color: #182227;
 }
 
 .title {
