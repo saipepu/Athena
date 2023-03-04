@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./text_game.css";
-import readXlsxFile from "read-excel-file";
 
 const scenes = [
-  // First scene
   {
     sceneID: 0,
     scene: "start",
@@ -12,7 +10,6 @@ const scenes = [
     text: "Talky-Talky",
     backgroundSize: undefined,
   },
-  // Second scene
   {
     sceneID: 1,
     scene: "employee",
@@ -21,63 +18,71 @@ const scenes = [
     text: "Hi sir! How can I help you today?",
     backgroundSize: 963,
   },
-  // Third scene
   {
     sceneID: 2,
     scene: "customer",
     background: "src/assets/third_scene_backgorund.png",
     avatar: "src/assets/customer_third.png",
-    text: "I want to reserve table for tonight at 8 pm.",
+    text: "I would like to move my reservations to a new date",
     backgroundSize: 1203,
   },
-  // Fourth scene
   {
     sceneID: 3,
     scene: "employee",
     background: "src/assets/employee_background.png",
     avatar: "src/assets/micperson.png",
-    text: "Sorry, we do not take reservation on weekend sir.",
+    text: "The line is really long right now so it will take awhile",
     backgroundSize: 963,
   },
-  // Fifth scene
   {
     sceneID: 4,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/fifth_model.png",
-    text: "Why don't you make it clear on the website?",
-    backgroundSize: 1263,
+    scene: "question",
+    background: "src/assets/employee_background.png",
+    question:
+      "You know he will have to wait in a long line, what would you say to him?",
+    options: [
+      {
+        option: "Let him wait without saying anything",
+        goToQuestionSceneID: 5,
+      },
+      {
+        option:
+          "Tell him that the line might be long, if its not urgent. He can try calling after 1 hour",
+        goToQuestionSceneID: 6,
+      },
+    ],
+    backgroundSize: 963,
   },
-  // six scene
   {
     sceneID: 5,
     scene: "customer",
     background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/six_model.png",
-    text: "This is awful I will never eat at your restaurant again!",
+    avatar: "src/assets/customer_third.png",
+    text: "Its more than 5 minutes. Let me call them again in an hour",
     backgroundSize: 1263,
   },
-  // question scene, seven scene
   {
     sceneID: 6,
-    scene: "question",
+    scene: "customer",
+    background: "src/assets/third_scene_backgorund.png",
+    avatar: "src/assets/fifth_model.png",
+    text: "I have waited for so long! I need to call them again!",
+    backgroundSize: 1263,
+  },
+  {
+    sceneID: 7,
+    scene: "time",
+    background: "src/assets/third_scene_backgorund.png",
+    text: "1 Hour Later",
+    backgroundSize: 1263,
+  },
+  {
+    sceneID: 8,
+    scene: "employee",
     background: "src/assets/employee_background.png",
     avatar: "src/assets/micperson.png",
-    question: "How would you deal with this situation?",
-    options: [
-      {
-        option: "Stay calm and apologize to him",
-      },
-      {
-        option: "Hang up call and ignore it",
-      },
-      {
-        option: "Transfer the call to the manager",
-      },
-    ],
-    answer: "Stay calm and apologize to him",
+    text: "Hello Sir! How can I help you?",
     backgroundSize: 963,
-    goToQuestionSceneID: 0,
   },
 ];
 
@@ -104,9 +109,9 @@ const StoryBased = () => {
   };
 
   const submitAnswer = (each) => {
-    if (scenes[nextSceneCount].answer === each.option) {
-      // setNextSceneCount(scenes[nextSceneCount].goToQuestionSceneID);
-    }
+    setTimeout(() => {
+      setNextSceneCount(each.goToQuestionSceneID);
+    }, 1000);
   };
 
   const checkAnswerBackgorundColor = (each) => {
@@ -117,6 +122,8 @@ const StoryBased = () => {
     }
   };
 
+  let isLast = nextSceneCount == scenes.length - 1;
+
   return (
     <div className="wrapper">
       <div
@@ -124,42 +131,18 @@ const StoryBased = () => {
         className="Scontainer"
       >
         {/* Button  */}
-        {nextSceneCount == scenes.length - 1 ? (
-          <div>
-            <button className="start_btn" onClick={nextScene}>
-              Done!
-            </button>
-            <button className="back_btn" onClick={backScene}>
-              Back
-            </button>
-          </div>
+        {start ? (
+          <button className="start_btn" onClick={nextScene}>
+            {isLast ? "Done!" : start ? "Start!" : "Next!"}
+          </button>
         ) : (
-          <>
-            {start ? (
-              <div>
-                <button className="start_btn" onClick={nextScene}>
-                  Start!
-                </button>
-                <h1 className="title">Talky-Talky</h1>
-              </div>
-            ) : (
-              <div>
-                <button className="start_btn" onClick={nextScene}>
-                  Next!
-                </button>
-                {scenes[nextSceneCount].scene === "start" ? (
-                  <></>
-                ) : (
-                  <>
-                    <button className="back_btn" onClick={backScene}>
-                      Back
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
-          </>
+          <button className="next_btn" onClick={nextScene}></button>
         )}
+
+        {isLast || (!start && scenes[nextSceneCount].scene !== "start") ? (
+          <button className="back_btn" onClick={backScene}></button>
+        ) : null}
+        {start ? <h1 className="title">Talky-Talky</h1> : null}
 
         {/* Process bar */}
         {!start ? (
@@ -205,7 +188,7 @@ const StoryBased = () => {
             className="StartPosition"
           ></div>
         ) : (
-          <div>
+          <>
             {scenes[nextSceneCount].scene === "employee" ? (
               <>
                 <div className="employeeSpeakbubble">
@@ -220,17 +203,19 @@ const StoryBased = () => {
                 ></div>
               </>
             ) : (
-              <>
+              <div>
                 {scenes[nextSceneCount].scene === "question" ? (
                   <>
-                    <div
-                      style={{
-                        backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
-                        backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
-                      }}
-                      className="employeePosition"
-                    ></div>
-                    <div>
+                    {scenes[nextSceneCount].avatar === undefined ? null : (
+                      <div
+                        style={{
+                          backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+                          backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+                        }}
+                        className="employeePosition"
+                      ></div>
+                    )}
+                    <div className="containerquestion">
                       <div className="questionScene">
                         <p className="questionText">
                           {scenes[nextSceneCount].question}
@@ -239,27 +224,20 @@ const StoryBased = () => {
                       <form id="submitform">
                         {scenes[nextSceneCount].options.map((each, key) => {
                           return (
-                            <div key={key} className="answerOptions">
-                              <span key={key}>
-                                <input
-                                  type="radio"
-                                  key={key}
-                                  id={key}
-                                  name="radio"
-                                />
-                                <label
-                                  onClick={submitAnswer(each)}
-                                  className={
-                                    scenes[nextSceneCount].answer ===
-                                    each.option
-                                      ? "correctanswer"
-                                      : "wronganswer"
-                                  }
-                                  htmlFor={key}
-                                >
-                                  {key + 1}. {each.option}
-                                </label>
-                              </span>
+                            <div key={key}>
+                              <label
+                                onClick={() => submitAnswer(each)}
+                                className="correctanswer"
+                                htmlFor={key}
+                              >
+                                {key + 1}. {each.option}
+                              </label>
+                              <input
+                                type="radio"
+                                key={key}
+                                id={key}
+                                name="radio"
+                              />
                             </div>
                           );
                         })}
@@ -277,31 +255,45 @@ const StoryBased = () => {
                           }}
                           className="StartPosition"
                         ></div>
-                        <h1 className="title">scenes[nextSceneCount].text</h1>
+                        <h1 className="title">{scenes[nextSceneCount].text}</h1>
                         <button className="start_btn" onClick={nextScene}>
                           Start!
                         </button>
                       </>
                     ) : (
                       <>
-                        <div className="customerSpeakbubble">
-                          <p className="hisir">{scenes[nextSceneCount].text}</p>
-                        </div>
+                        {scenes[nextSceneCount].scene === "time" ? (
+                          <div className="timebox">
+                            <div className="questionScene">
+                              <p className="timetext">
+                                {scenes[nextSceneCount].text}
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          <>
+                            <div className="customerSpeakbubble">
+                              <p className="hisir">
+                                {scenes[nextSceneCount].text}
+                              </p>
+                            </div>
 
-                        <div
-                          style={{
-                            backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
-                            backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
-                          }}
-                          className="customerPosition"
-                        ></div>
+                            <div
+                              style={{
+                                backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
+                                backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+                              }}
+                              className="customerPosition"
+                            ></div>
+                          </>
+                        )}
                       </>
                     )}
                   </div>
                 )}
-              </>
+              </div>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>
