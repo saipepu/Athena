@@ -60,7 +60,7 @@ const scenes = [
     avatar: "src/assets/customer_third.png",
     text: "Its more than 5 minutes. Let me call them again in an hour",
     backgroundSize: 1263,
-    customeBackScene: 4
+    customeBackScene: 4,
   },
   {
     sceneID: 6,
@@ -69,7 +69,7 @@ const scenes = [
     avatar: "src/assets/fifth_model.png",
     text: "I have waited for so long! I need to call them again!",
     backgroundSize: 1263,
-    customeBackScene: 4
+    customeBackScene: 4,
   },
   {
     sceneID: 7,
@@ -247,19 +247,19 @@ const StoryBased = () => {
   };
 
   const backScene = (scene) => {
-    console.log(scene)
-    function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
+    console.log(scene);
+    function isNumber(n) {
+      return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+    }
     if (isNumber(scene?.customeBackScene)) {
-      console.log("hello")
+      console.log("hello");
       setNextSceneCount(scene.customeBackScene);
-    }
-    else if (nextSceneCount >= scenes.length - 1) {
+    } else if (nextSceneCount >= scenes.length - 1) {
+      setNextSceneCount(nextSceneCount - 1);
+    } else {
       setNextSceneCount(nextSceneCount - 1);
     }
-    else {
-      setNextSceneCount(nextSceneCount - 1);
-    }
-    console.log(nextSceneCount)
+    console.log(nextSceneCount);
   };
 
   const submitAnswer = (each) => {
@@ -281,7 +281,9 @@ const StoryBased = () => {
   return (
     <div className="wrapper">
       <div
-        style={{ backgroundImage: `url(${scenes[nextSceneCount]?.background})` }}
+        style={{
+          backgroundImage: `url(${scenes[nextSceneCount]?.background})`,
+        }}
         className="Scontainer"
       >
         {/* Button  */}
@@ -294,7 +296,10 @@ const StoryBased = () => {
         )}
 
         {isLast || (!start && scenes[nextSceneCount]?.scene !== "start") ? (
-          <button className="back_btn" onClick={() => backScene(scenes[nextSceneCount])}></button>
+          <button
+            className="back_btn"
+            onClick={() => backScene(scenes[nextSceneCount])}
+          ></button>
         ) : null}
         {start ? <h1 className="storyBasedtitle">Talky-Talky</h1> : null}
 
@@ -409,7 +414,9 @@ const StoryBased = () => {
                           }}
                           className="StartPosition"
                         ></div>
-                        <h1 className="storyBasedtitle">{scenes[nextSceneCount].text}</h1>
+                        <h1 className="storyBasedtitle">
+                          {scenes[nextSceneCount].text}
+                        </h1>
                         <button className="start_btn" onClick={nextScene}>
                           Start!
                         </button>
