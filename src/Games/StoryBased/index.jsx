@@ -285,7 +285,7 @@ const StoryBased = () => {
         {isLast || (!start && scenes[nextSceneCount].scene !== "start") ? (
           <button className="back_btn" onClick={backScene}></button>
         ) : null}
-        {start ? <h1 className="title">Talky-Talky</h1> : null}
+        {start ? <h1 className="storyBasedtitle">Talky-Talky</h1> : null}
 
         {/* Process bar */}
         {!start ? (
@@ -398,7 +398,7 @@ const StoryBased = () => {
                           }}
                           className="StartPosition"
                         ></div>
-                        <h1 className="title">{scenes[nextSceneCount].text}</h1>
+                        <h1 className="storyBasedtitle">{scenes[nextSceneCount].text}</h1>
                         <button className="start_btn" onClick={nextScene}>
                           Start!
                         </button>
