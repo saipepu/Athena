@@ -293,10 +293,10 @@ label {
     background: red;
 } */
 
-input[type="radio"]:checked + label.correctanswer {
+input:checked + label {
   background: #d8febb;
 }
 
-input:checked ~ .wronganswer {
+input:checked + .wronganswer {
   background: #fedfe1;
 }
