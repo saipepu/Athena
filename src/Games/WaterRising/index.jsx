@@ -167,7 +167,7 @@ const WaterRising = () => {
               </div>
             </div>
             <div className="progress_container">
-              <div className="title">
+              <div className="water_Rising_title">
                 Experience Bar
               </div>
               <div className="progress">
