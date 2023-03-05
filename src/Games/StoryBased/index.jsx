@@ -60,6 +60,7 @@ const scenes = [
     avatar: "src/assets/customer_third.png",
     text: "Its more than 5 minutes. Let me call them again in an hour",
     backgroundSize: 1263,
+    customeBackScene: 4,
   },
   {
     sceneID: 6,
@@ -68,6 +69,7 @@ const scenes = [
     avatar: "src/assets/fifth_model.png",
     text: "I have waited for so long! I need to call them again!",
     backgroundSize: 1263,
+    customeBackScene: 4,
   },
   {
     sceneID: 7,
@@ -244,11 +246,20 @@ const StoryBased = () => {
     setStart(false);
   };
 
-  const backScene = () => {
-    if (nextSceneCount >= scenes.length - 1) {
+  const backScene = (scene) => {
+    console.log(scene);
+    function isNumber(n) {
+      return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+    }
+    if (isNumber(scene?.customeBackScene)) {
+      console.log("hello");
+      setNextSceneCount(scene.customeBackScene);
+    } else if (nextSceneCount >= scenes.length - 1) {
+      setNextSceneCount(nextSceneCount - 1);
+    } else {
       setNextSceneCount(nextSceneCount - 1);
     }
-    setNextSceneCount(nextSceneCount - 1);
+    console.log(nextSceneCount);
   };
 
   const submitAnswer = (each) => {
@@ -270,7 +281,9 @@ const StoryBased = () => {
   return (
     <div className="wrapper">
       <div
-        style={{ backgroundImage: `url(${scenes[nextSceneCount].background})` }}
+        style={{
+          backgroundImage: `url(${scenes[nextSceneCount]?.background})`,
+        }}
         className="Scontainer"
       >
         {/* Button  */}
@@ -282,8 +295,11 @@ const StoryBased = () => {
           <button className="next_btn" onClick={nextScene}></button>
         )}
 
-        {isLast || (!start && scenes[nextSceneCount].scene !== "start") ? (
-          <button className="back_btn" onClick={backScene}></button>
+        {isLast || (!start && scenes[nextSceneCount]?.scene !== "start") ? (
+          <button
+            className="back_btn"
+            onClick={() => backScene(scenes[nextSceneCount])}
+          ></button>
         ) : null}
         {start ? <h1 className="storyBasedtitle">Talky-Talky</h1> : null}
 
@@ -332,7 +348,7 @@ const StoryBased = () => {
           ></div>
         ) : (
           <>
-            {scenes[nextSceneCount].scene === "employee" ? (
+            {scenes[nextSceneCount]?.scene === "employee" ? (
               <>
                 <div className="employeeSpeakbubble">
                   <p className="hisir">{scenes[nextSceneCount].text}</p>
@@ -347,7 +363,7 @@ const StoryBased = () => {
               </>
             ) : (
               <div>
-                {scenes[nextSceneCount].scene === "question" ? (
+                {scenes[nextSceneCount]?.scene === "question" ? (
                   <>
                     {scenes[nextSceneCount].avatar === undefined ? null : (
                       <div
@@ -368,6 +384,12 @@ const StoryBased = () => {
                         {scenes[nextSceneCount].options.map((each, key) => {
                           return (
                             <div key={key}>
+                              <input
+                                type="radio"
+                                key={key}
+                                id={key}
+                                name="radio"
+                              />
                               <label
                                 onClick={() => submitAnswer(each)}
                                 className="correctanswer"
@@ -375,12 +397,6 @@ const StoryBased = () => {
                               >
                                 {key + 1}. {each.option}
                               </label>
-                              <input
-                                type="radio"
-                                key={key}
-                                id={key}
-                                name="radio"
-                              />
                             </div>
                           );
                         })}
@@ -389,7 +405,7 @@ const StoryBased = () => {
                   </>
                 ) : (
                   <div>
-                    {scenes[nextSceneCount].scene === "start" ? (
+                    {scenes[nextSceneCount]?.scene === "start" ? (
                       <>
                         <div
                           style={{
@@ -398,14 +414,16 @@ const StoryBased = () => {
                           }}
                           className="StartPosition"
                         ></div>
-                        <h1 className="storyBasedtitle">{scenes[nextSceneCount].text}</h1>
+                        <h1 className="storyBasedtitle">
+                          {scenes[nextSceneCount].text}
+                        </h1>
                         <button className="start_btn" onClick={nextScene}>
                           Start!
                         </button>
                       </>
                     ) : (
                       <>
-                        {scenes[nextSceneCount].scene === "time" ? (
+                        {scenes[nextSceneCount]?.scene === "time" ? (
                           <div className="timebox">
                             <div className="questionScene">
                               <p className="timetext">
@@ -417,14 +435,14 @@ const StoryBased = () => {
                           <>
                             <div className="customerSpeakbubble">
                               <p className="hisir">
-                                {scenes[nextSceneCount].text}
+                                {scenes[nextSceneCount]?.text}
                               </p>
                             </div>
 
                             <div
                               style={{
-                                backgroundImage: `url(${scenes[nextSceneCount].avatar})`,
-                                backgroundSize: `${scenes[nextSceneCount].backgroundSize}px`,
+                                backgroundImage: `url(${scenes[nextSceneCount]?.avatar})`,
+                                backgroundSize: `${scenes[nextSceneCount]?.backgroundSize}px`,
                               }}
                               className="customerPosition"
                             ></div>
