@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./text_game.css";
 
 const scenes = [
@@ -41,10 +41,12 @@ const scenes = [
     question:
       "You know he will have to wait in a long line, what would you say to him?",
     option1: "Let him wait without saying anything",
-    goToQuestionSceneIDoption1: 5,
+    goToQuestionSceneIDOption1: 5,
+    pointOption1: 0.5,
     option2:
       "Tell him that the line might be long, if its not urgent. He can try calling after 1 hour",
     goToQuestionSceneIDOption2: 6,
+    pointOption2: 1,
     backgroundSize: 963,
   },
   {
@@ -126,18 +128,14 @@ const scenes = [
     background: "src/assets/employee_background.png",
     question:
       "The customer is complaining, what should you do in this situation?",
-    options: [
-      {
-        option:
-          "Apologize and tell him that they will make it clear on the website in the future",
-        goToQuestionSceneID: 5,
-      },
-      {
-        option:
-          "Apologize to him and suggest a new promotion that comes with the bookings",
-        goToQuestionSceneID: 6,
-      },
-    ],
+    option1:
+      "Apologize and tell him that they will make it clear on the website in the future",
+    goToQuestionSceneIDOption1: 5,
+    pointOption1: 0.5,
+    option2:
+      "Apologize to him and suggest a new promotion that comes with the bookings",
+    goToQuestionSceneIDOption2: 6,
+    pointOption2: 1,
     backgroundSize: 963,
   },
   {
@@ -161,16 +159,12 @@ const scenes = [
     scene: "question",
     background: "src/assets/employee_background.png",
     question: "The customer is louder and has more energy, what would you do?",
-    options: [
-      {
-        option: "Stay Calm and control the tone",
-        goToQuestionSceneID: 5,
-      },
-      {
-        option: "Be adaptable and match the energy of the customer",
-        goToQuestionSceneID: 6,
-      },
-    ],
+    option1: "Stay Calm and control the tone",
+    goToQuestionSceneIDOption1: 5,
+    pointOption1: 0.5,
+    option2: "Be adaptable and match the energy of the customer",
+    goToQuestionSceneIDOption2: 6,
+    pointOption2: 1,
     backgroundSize: 963,
   },
   {
@@ -202,17 +196,13 @@ const scenes = [
     scene: "question",
     background: "src/assets/employee_background.png",
     question: "The problem has been solve. What will you do next?",
-    options: [
-      {
-        option: "Ask if there is anything else he needs?",
-        goToQuestionSceneID: 5,
-      },
-      {
-        option:
-          "Just tell him the change is done and say Thank you for using their service",
-        goToQuestionSceneID: 6,
-      },
-    ],
+    option1: "Ask if there is anything else he needs?",
+    goToQuestionSceneIDOption1: 5,
+    pointOption1: 1,
+    option2:
+      "Just tell him the change is done and say Thank you for using their service",
+    goToQuestionSceneIDOption2: 6,
+    pointOption2: 0.5,
     backgroundSize: 963,
   },
   {
@@ -465,10 +455,19 @@ Object.keys(scenes[questionScene]).filter((k) => {
 // console.log(scenes)
 
 const StoryBased = () => {
+  const [progressCount, setProgressCount] = useState(0);
   const [nextSceneCount, setNextSceneCount] = useState(0);
   const [start, setStart] = useState(true);
   const [next, setNext] = useState(false);
   const [buttonColor, setButtonColor] = useState("");
+
+  console.log(scenes[nextSceneCount]);
+
+  // Increase Progress bar
+  useEffect(() => {
+    const bar = document.getElementById("bar");
+    bar.style.width = progressCount * 12.5 + "%";
+  }, [nextSceneCount])
 
   const nextScene = () => {
     if (nextSceneCount === scenes.length - 1) {
@@ -492,9 +491,10 @@ const StoryBased = () => {
     }
   };
 
-  const submitAnswer = (goToQuestionSceneID) => {
+  const submitAnswer = (goToQuestionSceneID, reward) => {
     setTimeout(() => {
       setNextSceneCount(goToQuestionSceneID);
+      setProgressCount(point => point += reward)
     }, 1000);
   };
 
@@ -534,7 +534,7 @@ const StoryBased = () => {
         {start ? <h1 className="storyBasedtitle">Talky-Talky</h1> : null}
 
         {/* Process bar */}
-        {!start ? (
+        {/* {!start ? ( */}
           <div className="progress_wrapper">
             <div className="info">
               <div className="name_container">
@@ -564,9 +564,9 @@ const StoryBased = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <></>
-        )}
+        {/* ) : ( */}
+          {/* <></> */}
+        {/* )} */}
 
         {start ? (
           <div
@@ -618,7 +618,8 @@ const StoryBased = () => {
                             onClick={() =>
                               submitAnswer(
                                 scenes[nextSceneCount]
-                                  .goToQuestionSceneIDoption1
+                                  .goToQuestionSceneIDOption1, scenes[nextSceneCount]
+                                  .pointOption1
                               )
                             }
                             className="correctanswer"
@@ -633,7 +634,8 @@ const StoryBased = () => {
                             onClick={() =>
                               submitAnswer(
                                 scenes[nextSceneCount]
-                                  .goToQuestionSceneIDOption2
+                                  .goToQuestionSceneIDOption2, scenes[nextSceneCount]
+                                  .pointOption2
                               )
                             }
                             className="correctanswer"
