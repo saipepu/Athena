@@ -1,226 +1,220 @@
 import React, { useState, useEffect } from "react";
 import "./text_game.css";
 
-const scenes = [
-  {
-    sceneID: 0,
-    scene: "start",
-    background: "src/assets/talky_talky_startscreen.png",
-    avatar: "src/assets/start_model.png",
-    text: "Talky-Talky",
-    backgroundSize: undefined,
-  },
-  {
-    sceneID: 1,
-    scene: "employee",
-    background: "src/assets/employee_background.png",
-    avatar: "src/assets/micperson.png",
-    text: "Hi sir! How can I help you today?",
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 2,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/customer_third.png",
-    text: "I would like to move my reservations to a new date",
-    backgroundSize: 1203,
-  },
-  {
-    sceneID: 3,
-    scene: "employee",
-    background: "src/assets/employee_background.png",
-    avatar: "src/assets/micperson.png",
-    text: "The line is really long right now so it will take awhile",
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 4,
-    scene: "question",
-    background: "src/assets/employee_background.png",
-    question:
-      "You know he will have to wait in a long line, what would you say to him?",
-    option1: "Let him wait without saying anything",
-    goToQuestionSceneIDOption1: 5,
-    pointOption1: 0.5,
-    option2:
-      "Tell him that the line might be long, if its not urgent. He can try calling after 1 hour",
-    goToQuestionSceneIDOption2: 6,
-    pointOption2: 1,
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 5,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/customer_third.png",
-    text: "Its more than 5 minutes. Let me call them again in an hour",
-    backgroundSize: 1263,
-    customeBackScene: 4,
-  },
-  {
-    sceneID: 6,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/fifth_model.png",
-    text: "I have waited for so long! I need to call them again!",
-    backgroundSize: 1263,
-    customeBackScene: 4,
-  },
-  {
-    sceneID: 7,
-    scene: "time",
-    background: "src/assets/third_scene_backgorund.png",
-    text: "1 Hour Later",
-    backgroundSize: 1263,
-  },
-  {
-    sceneID: 8,
-    scene: "employee",
-    background: "src/assets/employee_background.png",
-    avatar: "src/assets/micperson.png",
-    text: "Hello Sir! How can I help you?",
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 9,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/customer_third.png",
-    text: "Hi, I would like to request a change in my reservation's date",
-    backgroundSize: 1203,
-  },
-  {
-    sceneID: 10,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/customer_third.png",
-    text: "If possible, can I move my reservation date to the 15th of Feb?",
-    backgroundSize: 1203,
-  },
-  {
-    sceneID: 11,
-    scene: "employee",
-    background: "src/assets/employee_background.png",
-    avatar: "src/assets/micperson.png",
-    text: "That is possible but there will be a fee for changing date of reservation",
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 12,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/fifth_model.png",
-    text: "What? I thought there were not fees for changing",
-    backgroundSize: 1263,
-  },
-  {
-    sceneID: 12,
-    scene: "employee",
-    background: "src/assets/employee_background.png",
-    avatar: "src/assets/micperson.png",
-    text: "I'm sorry but if you change 3 days prior, we will charge a fee sir.",
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 13,
-    scene: "question",
-    background: "src/assets/employee_background.png",
-    question:
-      "The customer is complaining, what should you do in this situation?",
-    option1:
-      "Apologize and tell him that they will make it clear on the website in the future",
-    goToQuestionSceneIDOption1: 5,
-    pointOption1: 0.5,
-    option2:
-      "Apologize to him and suggest a new promotion that comes with the bookings",
-    goToQuestionSceneIDOption2: 6,
-    pointOption2: 1,
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 14,
-    scene: "employee",
-    background: "src/assets/employee_background.png",
-    avatar: "src/assets/micperson.png",
-    text: "We're really sorry about this, we will make it more clear on the website!",
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 15,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/customer_third.png",
-    text: "Okay! then can I change to 14th of Feb? That has no fees right?",
-    backgroundSize: 1203,
-  },
-  {
-    sceneID: 16,
-    scene: "question",
-    background: "src/assets/employee_background.png",
-    question: "The customer is louder and has more energy, what would you do?",
-    option1: "Stay Calm and control the tone",
-    goToQuestionSceneIDOption1: 5,
-    pointOption1: 0.5,
-    option2: "Be adaptable and match the energy of the customer",
-    goToQuestionSceneIDOption2: 6,
-    pointOption2: 1,
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 17,
-    scene: "employee",
-    background: "src/assets/employee_background.png",
-    avatar: "src/assets/micperson.png",
-    text: "Yes, that would incur no extra fees. Would you like to proceed?",
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 18,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/customer_third.png",
-    text: "Yes, I would like to proceed with that option!",
-    backgroundSize: 1203,
-  },
-  {
-    sceneID: 19,
-    scene: "employee",
-    background: "src/assets/employee_background.png",
-    avatar: "src/assets/micperson.png",
-    text: "Okay, your reservations has been changed. ",
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 20,
-    scene: "question",
-    background: "src/assets/employee_background.png",
-    question: "The problem has been solve. What will you do next?",
-    option1: "Ask if there is anything else he needs?",
-    goToQuestionSceneIDOption1: 5,
-    pointOption1: 1,
-    option2:
-      "Just tell him the change is done and say Thank you for using their service",
-    goToQuestionSceneIDOption2: 6,
-    pointOption2: 0.5,
-    backgroundSize: 963,
-  },
-  {
-    sceneID: 21,
-    scene: "customer",
-    background: "src/assets/third_scene_backgorund.png",
-    avatar: "src/assets/customer_third.png",
-    text: "That is it now, Thank you so much!",
-    backgroundSize: 1203,
-  },
-];
-
-let count = 0;
-const questionScene = scenes.findIndex((scenes) => scenes.scene === "question");
-Object.keys(scenes[questionScene]).filter((k) => {
-  if (k.startsWith("option")) count++;
-});
-
+// let scenes = [
+//   {
+//     sceneID: 0,
+//     scene: "start",
+//     background: "src/assets/talky_talky_startscreen.png",
+//     avatar: "src/assets/start_model.png",
+//     text: "Talky-Talky",
+//     backgroundSize: undefined,
+//   },
+//   {
+//     sceneID: 1,
+//     scene: "employee",
+//     background: "src/assets/employee_background.png",
+//     avatar: "src/assets/micperson.png",
+//     text: "Hi sir! How can I help you today?",
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 2,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/customer_third.png",
+//     text: "I would like to move my reservations to a new date",
+//     backgroundSize: 1203,
+//   },
+//   {
+//     sceneID: 3,
+//     scene: "employee",
+//     background: "src/assets/employee_background.png",
+//     avatar: "src/assets/micperson.png",
+//     text: "The line is really long right now so it will take awhile",
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 4,
+//     scene: "question",
+//     background: "src/assets/employee_background.png",
+//     question:
+//       "You know he will have to wait in a long line, what would you say to him?",
+//     option1: "Let him wait without saying anything",
+//     goToQuestionSceneIDOption1: 5,
+//     pointOption1: 0.5,
+//     option2:
+//       "Tell him that the line might be long, if its not urgent. He can try calling after 1 hour",
+//     goToQuestionSceneIDOption2: 6,
+//     pointOption2: 1,
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 5,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/customer_third.png",
+//     text: "Its more than 5 minutes. Let me call them again in an hour",
+//     backgroundSize: 1263,
+//     customeBackScene: 4,
+//   },
+//   {
+//     sceneID: 6,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/fifth_model.png",
+//     text: "I have waited for so long! I need to call them again!",
+//     backgroundSize: 1263,
+//     customeBackScene: 4,
+//   },
+//   {
+//     sceneID: 7,
+//     scene: "time",
+//     background: "src/assets/third_scene_backgorund.png",
+//     text: "1 Hour Later",
+//     backgroundSize: 1263,
+//   },
+//   {
+//     sceneID: 8,
+//     scene: "employee",
+//     background: "src/assets/employee_background.png",
+//     avatar: "src/assets/micperson.png",
+//     text: "Hello Sir! How can I help you?",
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 9,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/customer_third.png",
+//     text: "Hi, I would like to request a change in my reservation's date",
+//     backgroundSize: 1203,
+//   },
+//   {
+//     sceneID: 10,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/customer_third.png",
+//     text: "If possible, can I move my reservation date to the 15th of Feb?",
+//     backgroundSize: 1203,
+//   },
+//   {
+//     sceneID: 11,
+//     scene: "employee",
+//     background: "src/assets/employee_background.png",
+//     avatar: "src/assets/micperson.png",
+//     text: "That is possible but there will be a fee for changing date of reservation",
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 12,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/fifth_model.png",
+//     text: "What? I thought there were not fees for changing",
+//     backgroundSize: 1263,
+//   },
+//   {
+//     sceneID: 12,
+//     scene: "employee",
+//     background: "src/assets/employee_background.png",
+//     avatar: "src/assets/micperson.png",
+//     text: "I'm sorry but if you change 3 days prior, we will charge a fee sir.",
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 13,
+//     scene: "question",
+//     background: "src/assets/employee_background.png",
+//     question:
+//       "The customer is complaining, what should you do in this situation?",
+//     option1:
+//       "Apologize and tell him that they will make it clear on the website in the future",
+//     goToQuestionSceneIDOption1: 5,
+//     pointOption1: 0.5,
+//     option2:
+//       "Apologize to him and suggest a new promotion that comes with the bookings",
+//     goToQuestionSceneIDOption2: 6,
+//     pointOption2: 1,
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 14,
+//     scene: "employee",
+//     background: "src/assets/employee_background.png",
+//     avatar: "src/assets/micperson.png",
+//     text: "We're really sorry about this, we will make it more clear on the website!",
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 15,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/customer_third.png",
+//     text: "Okay! then can I change to 14th of Feb? That has no fees right?",
+//     backgroundSize: 1203,
+//   },
+//   {
+//     sceneID: 16,
+//     scene: "question",
+//     background: "src/assets/employee_background.png",
+//     question: "The customer is louder and has more energy, what would you do?",
+//     option1: "Stay Calm and control the tone",
+//     goToQuestionSceneIDOption1: 5,
+//     pointOption1: 0.5,
+//     option2: "Be adaptable and match the energy of the customer",
+//     goToQuestionSceneIDOption2: 6,
+//     pointOption2: 1,
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 17,
+//     scene: "employee",
+//     background: "src/assets/employee_background.png",
+//     avatar: "src/assets/micperson.png",
+//     text: "Yes, that would incur no extra fees. Would you like to proceed?",
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 18,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/customer_third.png",
+//     text: "Yes, I would like to proceed with that option!",
+//     backgroundSize: 1203,
+//   },
+//   {
+//     sceneID: 19,
+//     scene: "employee",
+//     background: "src/assets/employee_background.png",
+//     avatar: "src/assets/micperson.png",
+//     text: "Okay, your reservations has been changed. ",
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 20,
+//     scene: "question",
+//     background: "src/assets/employee_background.png",
+//     question: "The problem has been solve. What will you do next?",
+//     option1: "Ask if there is anything else he needs?",
+//     goToQuestionSceneIDOption1: 5,
+//     pointOption1: 1,
+//     option2:
+//       "Just tell him the change is done and say Thank you for using their service",
+//     goToQuestionSceneIDOption2: 6,
+//     pointOption2: 0.5,
+//     backgroundSize: 963,
+//   },
+//   {
+//     sceneID: 21,
+//     scene: "customer",
+//     background: "src/assets/third_scene_backgorund.png",
+//     avatar: "src/assets/customer_third.png",
+//     text: "That is it now, Thank you so much!",
+//     backgroundSize: 1203,
+//   },
+// ];
+//
 // const scenes = [
 //   {
 //     sceneID: 0,
@@ -451,8 +445,380 @@ Object.keys(scenes[questionScene]).filter((k) => {
 //   },
 // ];
 
-// let scenes = JSON.parse(localStorage.getItem("data"));
-// console.log(scenes)
+let scenes = JSON.parse(localStorage.getItem("data"));
+if (scenes !== null) {
+  console.log("local storage");
+} else {
+  scenes = [
+    {
+      sceneID: 0,
+      scene: "start",
+      background: "src/assets/talky_talky_startscreen.png",
+      question: "",
+      avatar: "src/assets/start_model.png",
+      text: "Talky-Talky",
+      backgroundSize: "",
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 1,
+      scene: "employee",
+      background: "src/assets/employee_background.png",
+      question: "",
+      avatar: "src/assets/micperson.png",
+      text: "Hi sir! How can I help you today?",
+      backgroundSize: 963,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 2,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/customer_third.png",
+      text: "I would like to move my reservations to a new date",
+      backgroundSize: 1203,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 3,
+      scene: "employee",
+      background: "src/assets/employee_background.png",
+      question: "",
+      avatar: "src/assets/micperson.png",
+      text: "The line is really long right now so it will take awhile",
+      backgroundSize: 963,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 4,
+      scene: "question",
+      background: "src/assets/employee_background.png",
+      question:
+        "You know he will have to wait in a long line, what would you say to him?",
+      backgroundSize: 963,
+      option1: "Let him wait without saying anything",
+      goToQuestionSceneIDOption1: 5,
+      pointOption1: 0.5,
+      option2:
+        "Tell him that the line might be long, if its not urgent. He can try calling after 1 hour",
+      goToQuestionSceneIDOption2: 6,
+      pointOption2: 1,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 5,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/customer_third.png",
+      text: "Its more than 5 minutes. Let me call them again in an hour",
+      backgroundSize: 1263,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: 4,
+    },
+    {
+      sceneID: 6,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/fifth_model.png",
+      text: "I have waited for so long! I need to call them again!",
+      backgroundSize: 1263,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: 4,
+    },
+    {
+      sceneID: 7,
+      scene: "time",
+      question: "",
+      background: "src/assets/third_scene_backgorund.png",
+      text: "1 Hour Later",
+      backgroundSize: 1263,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: 4,
+    },
+    {
+      sceneID: 8,
+      scene: "employee",
+      background: "src/assets/employee_background.png",
+      question: "",
+      avatar: "src/assets/micperson.png",
+      text: "Hello Sir! How can I help you?",
+      backgroundSize: 963,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 9,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/customer_third.png",
+      text: "Hi, I would like to request a change in my reservation's date",
+      backgroundSize: 1203,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 10,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/customer_third.png",
+      text: "If possible, can I move my reservation date to the 15th of Feb?",
+      backgroundSize: 1203,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 11,
+      scene: "employee",
+      background: "src/assets/employee_background.png",
+      question: "",
+      avatar: "src/assets/micperson.png",
+      text: "That is possible but there will be a fee for changing date of reservation",
+      backgroundSize: 963,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 12,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/fifth_model.png",
+      text: "What? I thought there were not fees for changing",
+      backgroundSize: 1263,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 12,
+      scene: "employee",
+      background: "src/assets/employee_background.png",
+      question: "",
+      avatar: "src/assets/micperson.png",
+      text: "I'm sorry but if you change 3 days prior, we will charge a fee sir.",
+      backgroundSize: 963,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 13,
+      scene: "question",
+      background: "src/assets/employee_background.png",
+      question:
+        "The customer is complaining, what should you do in this situation?",
+      option1:
+        "Apologize and tell him that they will make it clear on the website in the future",
+      goToQuestionSceneIDOption1: 5,
+      pointOption1: 0.5,
+      option2:
+        "Apologize to him and suggest a new promotion that comes with the bookings",
+      goToQuestionSceneIDOption2: 6,
+      pointOption2: 1,
+      backgroundSize: 963,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 14,
+      scene: "employee",
+      background: "src/assets/employee_background.png",
+      question: "",
+      avatar: "src/assets/micperson.png",
+      text: "We're really sorry about this, we will make it more clear on the website!",
+      backgroundSize: 963,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 15,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/customer_third.png",
+      text: "Okay! then can I change to 14th of Feb? That has no fees right?",
+      backgroundSize: 1203,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 16,
+      scene: "question",
+      background: "src/assets/employee_background.png",
+      question:
+        "The customer is louder and has more energy, what would you do?",
+      option1: "Stay Calm and control the tone",
+      goToQuestionSceneIDOption1: 5,
+      pointOption1: 0.5,
+      option2: "Be adaptable and match the energy of the customer",
+      goToQuestionSceneIDOption2: 6,
+      pointOption2: 1,
+      backgroundSize: 963,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 17,
+      scene: "employee",
+      background: "src/assets/employee_background.png",
+      question: "",
+      avatar: "src/assets/micperson.png",
+      text: "Yes, that would incur no extra fees. Would you like to proceed?",
+      backgroundSize: 963,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 18,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/customer_third.png",
+      text: "Yes, I would like to proceed with that option!",
+      backgroundSize: 1203,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 19,
+      scene: "employee",
+      background: "src/assets/employee_background.png",
+      question: "",
+      avatar: "src/assets/micperson.png",
+      text: "Okay, your reservations has been changed. ",
+      backgroundSize: 963,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 20,
+      scene: "question",
+      background: "src/assets/employee_background.png",
+      question: "The problem has been solve. What will you do next?",
+      option1: "Ask if there is anything else he needs?",
+      goToQuestionSceneIDOption1: 21,
+      pointOption1: 1,
+      option2:
+        "Just tell him the change is done and say Thank you for using their service",
+      goToQuestionSceneIDOption2: 21,
+      pointOption2: 0.5,
+      backgroundSize: 963,
+      customeBackScene: null,
+    },
+    {
+      sceneID: 21,
+      scene: "customer",
+      background: "src/assets/third_scene_backgorund.png",
+      question: "",
+      avatar: "src/assets/customer_third.png",
+      text: "That is it now, Thank you so much!",
+      backgroundSize: 1203,
+      option1: "",
+      goToQuestionSceneIDOption1: null,
+      pointOption1: null,
+      option2: "",
+      goToQuestionSceneIDOption2: null,
+      pointOption2: null,
+      customeBackScene: null,
+    },
+  ];
+  console.log("not local storage");
+}
 
 const StoryBased = () => {
   const [progressCount, setProgressCount] = useState(0);
@@ -467,7 +833,7 @@ const StoryBased = () => {
   useEffect(() => {
     const bar = document.getElementById("bar");
     bar.style.width = progressCount * 12.5 + "%";
-  }, [nextSceneCount])
+  }, [nextSceneCount]);
 
   const nextScene = () => {
     if (nextSceneCount === scenes.length - 1) {
@@ -494,7 +860,7 @@ const StoryBased = () => {
   const submitAnswer = (goToQuestionSceneID, reward) => {
     setTimeout(() => {
       setNextSceneCount(goToQuestionSceneID);
-      setProgressCount(point => point += reward)
+      setProgressCount((point) => (point += reward));
     }, 1000);
   };
 
@@ -534,39 +900,31 @@ const StoryBased = () => {
         {start ? <h1 className="storyBasedtitle">Talky-Talky</h1> : null}
 
         {/* Process bar */}
-        {/* {!start ? ( */}
-          <div className="progress_wrapper">
-            <div className="info">
-              <div className="name_container">
-                <p className="rank">A</p>
-                <p className="name">5 ATHENA</p>
-              </div>
-              <div className="avatar">
-                <img
-                  src="src/assets/avatar.png"
-                  alt="avatar"
-                  className="avatar_img"
-                />
-              </div>
+        <div className="progress_wrapper">
+          <div className="info">
+            <div className="name_container">
+              <p className="rank">A</p>
+              <p className="name">5 ATHENA</p>
             </div>
-            <div className="progress_container">
-              <div className="title">Experience Bar</div>
-              <div className="progress">
-                <img
-                  src="src/assets/exp_img.png"
-                  alt="exp"
-                  className="exp_img"
-                />
-                <div className="progress_bar">
-                  <div className="bar" id="bar"></div>
-                  <div className="xp">XP</div>
-                </div>
+            <div className="avatar">
+              <img
+                src="src/assets/avatar.png"
+                alt="avatar"
+                className="avatar_img"
+              />
+            </div>
+          </div>
+          <div className="progress_container">
+            <div className="title">Experience Bar</div>
+            <div className="progress">
+              <img src="src/assets/exp_img.png" alt="exp" className="exp_img" />
+              <div className="progress_bar">
+                <div className="bar" id="bar"></div>
+                <div className="xp">XP</div>
               </div>
             </div>
           </div>
-        {/* ) : ( */}
-          {/* <></> */}
-        {/* )} */}
+        </div>
 
         {start ? (
           <div
@@ -618,8 +976,8 @@ const StoryBased = () => {
                             onClick={() =>
                               submitAnswer(
                                 scenes[nextSceneCount]
-                                  .goToQuestionSceneIDOption1, scenes[nextSceneCount]
-                                  .pointOption1
+                                  .goToQuestionSceneIDOption1,
+                                scenes[nextSceneCount].pointOption1
                               )
                             }
                             className="correctanswer"
@@ -634,8 +992,8 @@ const StoryBased = () => {
                             onClick={() =>
                               submitAnswer(
                                 scenes[nextSceneCount]
-                                  .goToQuestionSceneIDOption2, scenes[nextSceneCount]
-                                  .pointOption2
+                                  .goToQuestionSceneIDOption2,
+                                scenes[nextSceneCount].pointOption2
                               )
                             }
                             className="correctanswer"

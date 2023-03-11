@@ -25,8 +25,8 @@ const Excel = () => {
     });
 
     promise.then((data) => {
-        console.log(data);
         localStorage.setItem('data', JSON.stringify(data));
+        console.log(data);
     })
   };
 
