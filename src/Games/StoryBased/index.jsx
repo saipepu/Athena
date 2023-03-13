@@ -558,25 +558,6 @@ const StoryBased = () => {
                             2. {scenes[nextSceneCount].option2}
                           </label>
                         </div>
-                        {/* {scenes[nextSceneCount].options.map((each, key) => {
-                          return (
-                            <div key={key}>
-                              <input
-                                type="radio"
-                                key={key}
-                                id={key}
-                                name="radio"
-                              />
-                              <label
-                                onClick={() => submitAnswer(each)}
-                                className="correctanswer"
-                                htmlFor={key}
-                              >
-                                {key + 1}. {each.option}
-                              </label>
-                            </div>
-                          );
-                        })} */}
                       </form>
                     </div>
                   </>
