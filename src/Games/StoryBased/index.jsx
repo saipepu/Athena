@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./text_game.css";
 
+
 let scenes = JSON.parse(localStorage.getItem("data"));
 if (scenes !== null) {
   console.log("local storage");
@@ -525,7 +526,6 @@ const StoryBased = () => {
                         </p>
                       </div>
                       <form id="submitform">
-                        {/* @@@ */}
                         <div>
                           <input type="radio" id="1" name="radio" />
                           <label
