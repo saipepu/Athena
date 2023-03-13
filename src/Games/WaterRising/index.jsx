@@ -229,6 +229,7 @@ const WaterRising = () => {
                   {sample[qNo].options.map((item,index) => (
                     <>
                       <input
+                        style={{ display: 'none'}}
                         type="radio"
                         key={index.toString()}
                         id={index}

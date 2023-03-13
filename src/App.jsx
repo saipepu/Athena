@@ -4,12 +4,14 @@ import WaterRising from "./Games/WaterRising";
 import StoryBased from "./Games/StoryBased";
 // import Excel from './Games/StoryBased/Excel.jks'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/waterRising" element={<WaterRising />} />
           <Route path="/storyBased" element={<StoryBased />} />
           {/* <Route path="/storyBasedExcel" element={<Excel />} /> */}
