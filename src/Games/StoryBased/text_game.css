@@ -81,6 +81,7 @@
   position: absolute;
   left: 10%;
   top: 27%;
+  overflow: visible;
 }
 
 .answerOptions {
@@ -185,6 +186,7 @@
   justify-content: center;
   background: #eeeeee;
   padding: 50px;
+  overflow: hidden;
 }
 
 .Scontainer {
@@ -244,7 +246,7 @@ button:hover {
   z-index: 10;
 }
 
-input {
+input[type="radio"] {
   display: none;
 }
 
@@ -292,11 +294,16 @@ label {
 /* input:checked+label {
     background: red;
 } */
-
+label {
+  outline: 0px solid #d8febb;
+}
 input:checked + label {
-  background: #d8febb;
+  outline-width: 5px;
 }
 
 input:checked + .wronganswer {
   background: #fedfe1;
+}
+.input_container {
+  overflow: visible;
 }

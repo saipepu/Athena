@@ -65,15 +65,19 @@
   font-weight: 600;
 }
 .claim_reward {
+  color: white;
   background: #5dca25;
   border: 1px solid #c7c7c7;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
   text-decoration: underline;
+  padding: 12px 24px;
 }
 .play_again {
+  color: white;
   background: #ee5253;
   border: 1px solid #c7c7c7;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
+  padding: 12px 24px;
 }

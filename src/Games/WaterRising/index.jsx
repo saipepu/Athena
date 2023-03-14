@@ -13,12 +13,15 @@ import person4 from '../../assets/person4.png'
 import person5 from '../../assets/person5.png'
 import avatar from '../../assets/avatar.png'
 import exp_img from '../../assets/exp_img.png'
-import { sample } from './sample_q'
+// import { sample } from './sample_q'
 import StartModel from '../../components/StartModel'
 import GameOver from '../../components/GameOver'
+import GSheetReader from '../../Excel/GSheetReader'
 
 const WaterRising = () => {
 
+  const sample = GSheetReader;
+  console.log(sample);
   const [qNo, setQNo] = useState(0);
   const [waterHeight, setWaterHeight] = useState(90);
   const initialScore = {"score1": 80, "score2": 80, "score3": 80, "score4": 80, "score5": 80};
@@ -92,7 +95,7 @@ const WaterRising = () => {
     } else {
       setCorrect(false);
     }
-    console.log(correct, 74)
+    // console.log(correct, 74)
     setAnswer(ans);
     
     setWaterHeight(waterHeight - 5);
@@ -118,7 +121,7 @@ const WaterRising = () => {
       const water_level_top = water_level.getBoundingClientRect().top;
       const human_top = human.getBoundingClientRect().top;
       const offset = water_level_top - human_top;
-      console.log(offset);
+      // console.log(offset);
 
       if(offset < 10) {
         setGameOver(!gameOver);
@@ -136,11 +139,11 @@ const WaterRising = () => {
     if(correct) {
       score["score4"] = score["score4"] - scale;
       setScore({...score})
-      console.log('correct')
+      // console.log('correct')
     } else {
-      console.log('no')
+      console.log('not correct for score4', 144)
     }
-    console.log("run");
+    // console.log("run");
   }, [correct])
 
   // Increase Progress bar
@@ -190,9 +193,8 @@ const WaterRising = () => {
             {/* game screen layer */}
               <div className="pole_container" >
                 {participant.map((player, index) => {
-                  console.log(player.score - waterHeight);
+                  // console.log(player.score - waterHeight);
                   return (
-                    <>
                       <div key={index.toString()} className="p_container"
                             style={{
                               transform: `translateY(${player.score}%)`,
@@ -209,7 +211,6 @@ const WaterRising = () => {
                           )}
                           <img src={player.pole} alt="pole" className="pole" id={player.human ? "human" : "bot"} />
                       </div>
-                    </>
                   )
                 })}
                 <img

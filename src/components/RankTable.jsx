@@ -13,7 +13,7 @@ const RankTable = () => {
   return (
     <TableContainer
       // bgColor="red"
-      minWidth="800px" width="100%" maxWidth="1000px" padding="0px 32px">
+      minWidth="800px" width="100%" maxWidth="1000px" padding="0px 24px">
       <Table variant="simple" width="100%" overflow="visible">
         <TableCaption>Employee Ranks</TableCaption>
         <Thead oveflow="visible" borderRadius="12px" width="100%">

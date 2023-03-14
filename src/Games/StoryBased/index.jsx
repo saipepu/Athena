@@ -526,7 +526,7 @@ const StoryBased = () => {
                         </p>
                       </div>
                       <form id="submitform">
-                        <div>
+                        <div className="input_container">
                           <input type="radio" id="1" name="radio" />
                           <label
                             onClick={() =>
@@ -542,7 +542,7 @@ const StoryBased = () => {
                             1. {scenes[nextSceneCount].option1}
                           </label>
                         </div>
-                        <div>
+                        <div className="input_container">
                           <input type="radio" id="2" name="radio" />
                           <label
                             onClick={() =>
